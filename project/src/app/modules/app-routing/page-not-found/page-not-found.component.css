@@ -1,0 +1,13 @@
+h1 {
+    width: 100%;
+    text-align: center;
+}
+
+a {
+    text-decoration: none;
+}
+
+.smallcontainer {
+    margin: 0 auto;
+    max-width: 800px;
+}

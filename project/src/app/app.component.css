@@ -1,0 +1,33 @@
+h2 {
+    padding-right: 32px;
+}
+
+.fill-space {
+    flex: 1 1 auto;
+  }
+
+.active {
+    border-radius: 2px;
+    background: #2c3982;
+}
+
+.mat-sidenav { 
+    width: 150px;
+}
+
+.dummy {
+    height: 0;
+}
+
+@media screen and (max-width: 600px) {
+    .active {
+        border-radius: 0px;
+        background: darkgrey;
+        color: white;
+    }
+
+    button:hover {
+        border-radius: 0px;
+    }
+}
+

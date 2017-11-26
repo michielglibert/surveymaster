@@ -1,0 +1,19 @@
+<mat-card>
+    <div>
+        <div class="header" fxLayoutAlign="center center">
+            <h1>{{survey.vraag}}</h1>
+        </div>
+        <div fxLayout="column" fxLayoutGap="24px">
+            <mat-card-content fxLayout.xs="column" fxLayoutGap.xs="16px" fxLayoutAlign="space-evenly center">
+                <button color="primary" mat-raised-button>{{survey.antwoord1}}</button>
+                <button mat-raised-button>{{survey.antwoord2}}</button>
+            </mat-card-content>
+        </div>
+    </div>
+    <div class="divider"></div>
+    <div fxLayoutAlign="center center">
+        <button class="test" mat-raised-button [disabled]="loading" (click)="skipQuestion()">Skip question
+            <mat-spinner *ngIf="loading" [diameter]="20"></mat-spinner>
+        </button>
+    </div>
+</mat-card>

@@ -1,20 +1,42 @@
-<!--The content below is only a placeholder and can be replaced.-->
-<div style="text-align:center">
-  <h1>
-    Welcome to {{title}}!
-  </h1>
-  <img width="300" src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyNTAgMjUwIj4KICAgIDxwYXRoIGZpbGw9IiNERDAwMzEiIGQ9Ik0xMjUgMzBMMzEuOSA2My4ybDE0LjIgMTIzLjFMMTI1IDIzMGw3OC45LTQzLjcgMTQuMi0xMjMuMXoiIC8+CiAgICA8cGF0aCBmaWxsPSIjQzMwMDJGIiBkPSJNMTI1IDMwdjIyLjItLjFWMjMwbDc4LjktNDMuNyAxNC4yLTEyMy4xTDEyNSAzMHoiIC8+CiAgICA8cGF0aCAgZmlsbD0iI0ZGRkZGRiIgZD0iTTEyNSA1Mi4xTDY2LjggMTgyLjZoMjEuN2wxMS43LTI5LjJoNDkuNGwxMS43IDI5LjJIMTgzTDEyNSA1Mi4xem0xNyA4My4zaC0zNGwxNy00MC45IDE3IDQwLjl6IiAvPgogIDwvc3ZnPg==">
-</div>
-<h2>Here are some links to help you start: </h2>
-<ul>
-  <li>
-    <h2><a target="_blank" rel="noopener" href="https://angular.io/tutorial">Tour of Heroes</a></h2>
-  </li>
-  <li>
-    <h2><a target="_blank" rel="noopener" href="https://github.com/angular/angular-cli/wiki">CLI Documentation</a></h2>
-  </li>
-  <li>
-    <h2><a target="_blank" rel="noopener" href="https://blog.angular.io/">Angular blog</a></h2>
-  </li>
-</ul>
+<mat-sidenav-container fullscreen>
+  <mat-sidenav mode="over" #sidenav>
+    <div fxLayout="column">
+      <mat-toolbar fxLayoutAlign="center center" color="primary">
+        <h1>Menu</h1>
+      </mat-toolbar>
+      <div class="buttons" fxLayout="column" (click)="sidenav.close()">
+        <button mat-button class="dummy"></button>
+        <button routerLinkActive="active" [routerLink]="['/survey']" mat-button>Survey</button>
+        <div class="divider"></div>
+        <button routerLinkActive="active" [routerLink]="['/user/profile']" mat-button>Profile</button>
+        <button [routerLink]="['/user/login']" mat-button>Login</button>
+      </div>
+    </div>
+  </mat-sidenav>
 
+
+  <mat-toolbar color="primary" fxLayoutGap="16px" fxLayoutAlign.xs="center center" fxLayoutAlign="start center">
+    <h2>Surveymaster</h2>
+    <button mat-button (click)="sidenav.open()" fxHide="false" fxHide.gt-xs>
+      <mat-icon>menu</mat-icon>
+    </button>
+
+    <div fxLayout="row" fxShow="false" fxShow.gt-xs fxLayoutAlign="space-between" fxFlex="100%">
+      <div fxLayoutGap="16px">
+        <button routerLinkActive="active" [routerLink]="['/survey']" mat-button>Survey</button>
+      </div>
+      <div fxLayoutGap="16px">
+        <button routerLinkActive="active" [routerLink]="['/user/profile']" mat-button>Profile</button>
+        <button [routerLink]="['/user/login']" mat-button>Login</button>
+      </div>
+    </div>
+  </mat-toolbar>
+
+  <div fxLayout="column" *ngIf="loading" fxLayoutAlign="center center" >
+    <mat-spinner fxFlexOffset="150px" ></mat-spinner>
+  </div>
+
+  <div class="container" *ngIf="!loading">
+    <router-outlet></router-outlet>
+  </div>
+</mat-sidenav-container>
