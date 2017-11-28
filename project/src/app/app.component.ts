@@ -39,7 +39,7 @@ export class AppComponent {
 
   openDialog(): void {
     let dialogRef = this.dialog.open(LoginDialogComponent, {
-      width: '250px'
+      width: '350px'
     });
   }
 

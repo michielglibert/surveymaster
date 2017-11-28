@@ -25,13 +25,8 @@ export class LoginDialogComponent implements OnInit {
     if (form.valid) {
       this.authService.login(this.username, this.password).subscribe(val => {
         if (val) {
-          if (this.authService.redirectUrl) {
-            this.router.navigateByUrl(this.authService.redirectUrl);
-            this.authService.redirectUrl = undefined;
-          } else {
-            this.router.navigate(['/survey']);
-          }
-        }
+          this.dialogRef.close();
+        }        
       }, err => this.errorMessage = err.error.message);
     }
   }
