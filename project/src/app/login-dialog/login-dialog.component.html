@@ -1,0 +1,24 @@
+
+<h1>
+  Login
+</h1>
+
+
+<form fxLayout="column" #form="ngForm" (ngSubmit)="login(form)">
+  <div fxLayout="column" fxLayoutGap="8px">
+    <mat-form-field>
+      <input matInput placeholder="Naam of e-mail" [(ngModel)]="username" name="username" required>
+    </mat-form-field>
+    <mat-form-field>
+      <input matInput placeholder="Wachtwoord" [(ngModel)]="password" name="password" type="password" required>
+    </mat-form-field>
+  </div>
+  <div class="error">
+    <mat-error>{{errorMessage}}</mat-error>
+  </div>
+  <button color="primary" mat-raised-button fxFlex="70%">
+    Log in
+  </button>
+
+  <a (click)="registerClick()">Not a member yet? Register</a>
+</form>

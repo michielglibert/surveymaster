@@ -5,11 +5,11 @@ import { HttpClient } from '@angular/common/http';
 
 @Injectable()
 export class SurveyDataService {
-  private readonly _url = 'http://localhost:3000';
+  private readonly _url = 'http://localhost:3000/';
 
   constructor(private http:HttpClient) { }
 
   getSurvey(): Observable<Survey> {
-    return this.http.get<Survey>(this._url + '/API/survey');
+    return this.http.get<Survey>(this._url + 'API/survey');
   }
 }

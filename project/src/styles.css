@@ -12,6 +12,12 @@ body {
     padding: 16px;
 }
 
+.smallcontainer {
+    max-width: 800px;
+    margin: 0px auto;
+    padding: 16px;
+}
+
 .divider {
     display: block;
     height: 1px;

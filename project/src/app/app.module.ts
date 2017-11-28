@@ -8,22 +8,30 @@ import { SurveyModule } from './modules/survey/survey.module';
 import { UserModule } from './modules/user/user.module';
 import { AppRouteModule } from './modules/app-routing/app-routing.module';
 import { MaterialModule } from './modules/material.module';
+import { LoginDialogComponent } from './login-dialog/login-dialog.component';
+import { FormsModule } from '@angular/forms';
 
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    LoginDialogComponent
   ],
   imports: [
     BrowserModule,
     BrowserAnimationsModule,
     HttpClientModule,
-    FlexLayoutModule,    
+    FlexLayoutModule,  
+    FormsModule,  
     //Eigen modules
     SurveyModule,
     UserModule,
     AppRouteModule,
     MaterialModule
+    
+  ],
+  entryComponents: [
+    LoginDialogComponent
   ],
   providers: [],
   bootstrap: [AppComponent]

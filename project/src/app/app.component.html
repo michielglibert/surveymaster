@@ -28,6 +28,8 @@
       <div fxLayoutGap="16px">
         <button routerLinkActive="active" [routerLink]="['/user/profile']" mat-button>Profile</button>
         <button [routerLink]="['/user/login']" mat-button>Login</button>
+        <button (click)="openDialog()" mat-button>Login</button>
+        <button (click)="logout()" mat-button>Logout</button>
       </div>
     </div>
   </mat-toolbar>

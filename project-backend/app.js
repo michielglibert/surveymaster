@@ -4,16 +4,25 @@ var favicon = require('serve-favicon');
 var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
+var dotEnv = require('dotenv').config({path: './secret.env'});
 var mongoose = require('mongoose');
-mongoose.connect('mongodb://localhost:27017/surveydb', { useMongoClient: true })
-require('./models/survey')
+let passport = require('passport');
+//mongoose.connect('mongodb://user:notasafepass@ds121726.mlab.com:21726/surveymaster', { useMongoClient: true })
+var mongoURI = 'mongodb://user:notasafepass@ds121726.mlab.com:21726/surveymaster';
+
+require('./models/survey');
+require('./models/user');
 
 var index = require('./routes/index');
 var users = require('./routes/users');
+require('./config/passport');
+
+mongoose.connect(process.env.MONGOLAB_URI || mongoURI);
 
 var app = express();
 
-app.use(function(req,res,next){setTimeout(next,1000)});
+
+//app.use(function(req,res,next){setTimeout(next,1000)});
 
 // Add headers
 app.use(function (req, res, next) {
@@ -68,6 +77,7 @@ app.use(function (err, req, res, next) {
   res.render('error');
 });
 
+app.use(passport.initialize());
 
 
 module.exports = app;
