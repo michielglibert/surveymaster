@@ -27,11 +27,18 @@ mat-card-content > button {
 }
 
 .comment {
+    
     margin: 0px 32px;
 }
 
 .comment h4 {
-    margin: 8px 16px;
+    margin: 0px 16px;
+}
+
+.comment p {
+    margin-top: 8px;
+    margin-bottom: 0px;
+    word-wrap: break-word;
 }
 
 .comment .counter {
@@ -52,4 +59,12 @@ mat-card-content > button {
 h2 {
     width: 100%;
     text-align: center;
+}
+
+mat-form-field {
+    width: 100%;
+}
+
+textarea {
+    resize: none !important;
 }

@@ -8,6 +8,7 @@ import { RouterModule } from "@angular/router";
 import { MaterialModule } from "../material.module";
 import { FlexLayoutModule } from "@angular/flex-layout";
 import { SurveyResolver } from "./survey.resolver";
+import { FormsModule } from "@angular/forms";
 
 
 const routes = [
@@ -22,6 +23,7 @@ const routes = [
         FlexLayoutModule,
         RouterModule.forChild(routes),
         MaterialModule,
+        FormsModule
     ],
     declarations: [
         SurveyComponent,

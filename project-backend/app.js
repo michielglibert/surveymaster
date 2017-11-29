@@ -10,8 +10,9 @@ let passport = require('passport');
 //mongoose.connect('mongodb://user:notasafepass@ds121726.mlab.com:21726/surveymaster', { useMongoClient: true })
 var mongoURI = 'mongodb://user:notasafepass@ds121726.mlab.com:21726/surveymaster';
 
-require('./models/survey');
 require('./models/user');
+require('./models/survey');
+
 
 var index = require('./routes/index');
 var users = require('./routes/users');
@@ -34,7 +35,7 @@ app.use(function (req, res, next) {
   res.setHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS, PUT, PATCH, DELETE');
 
   // Request headers you wish to allow
-  res.setHeader('Access-Control-Allow-Headers', 'X-Requested-With,content-type');
+  res.setHeader('Access-Control-Allow-Headers', 'X-Requested-With,content-type, Authorization');
 
   // Set to true if you need the website to include cookies in the requests sent
   // to the API (e.g. in case you use sessions)
