@@ -18,7 +18,25 @@ export class SurveyDataService {
 
   addCommentToSurvey(surveyId, comment): Observable<Comment> {
     const currentUser = JSON.parse(localStorage.getItem('currentUser'));
-    return this.http.post<Comment>(this._url + 'API/survey/' + surveyId + '/comments', {comment: comment},
-    { headers: new HttpHeaders().set('Authorization', 'Bearer ' + currentUser.token) });
+    return this.http.post<Comment>(this._url + 'API/survey/' + surveyId + '/comments', { comment: comment },
+      { headers: new HttpHeaders().set('Authorization', 'Bearer ' + currentUser.token) });
+  }
+
+  answerSurvey(surveyId, answer): Observable<number> {
+    const currentUser = JSON.parse(localStorage.getItem('currentUser'));
+    return this.http.put<number>(this._url + 'API/survey/' + surveyId + '/answer', { numberAnswer: answer },
+      { headers: new HttpHeaders().set('Authorization', 'Bearer ' + currentUser.token) });
+  }
+
+  likeComment(commentId): Observable<boolean> {
+    const currentUser = JSON.parse(localStorage.getItem('currentUser'));
+    return this.http.put<boolean>(this._url + 'API/comment/' + commentId + '/like', {},
+      { headers: new HttpHeaders().set('Authorization', 'Bearer ' + currentUser.token) });
+  }
+
+  unlikeComment(commentId): Observable<boolean> {
+    const currentUser = JSON.parse(localStorage.getItem('currentUser'));
+    return this.http.put<boolean>(this._url + 'API/comment/' + commentId + '/unlike', {},
+      { headers: new HttpHeaders().set('Authorization', 'Bearer ' + currentUser.token) });
   }
 }

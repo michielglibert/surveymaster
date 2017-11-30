@@ -6,6 +6,8 @@ export class Survey {
     private _antwoord1:string;
     private _antwoord2:string;
     private _comments:Comment[];
+    countAntwoord1:number;
+    countAntwoord2:number;
 
     constructor() {}
 
@@ -24,4 +26,5 @@ export class Survey {
     get comments() {
         return this._comments;
     }
+
 }

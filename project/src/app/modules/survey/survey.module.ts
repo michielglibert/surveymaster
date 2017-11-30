@@ -28,7 +28,7 @@ const routes = [
     declarations: [
         SurveyComponent,
         AddsurveyComponent,
-        SurveyresultComponent,
+        SurveyresultComponent
     ],
     providers: [
         SurveyDataService,

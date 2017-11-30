@@ -5,9 +5,11 @@
         </div>
         <div fxLayout="column" fxLayoutGap="24px">
             <mat-card-content fxLayout.xs="column" fxLayoutGap.xs="16px" fxLayoutAlign="space-evenly center">
-                <button color="primary" mat-raised-button>{{survey.antwoord1}}</button>
-                <button mat-raised-button>{{survey.antwoord2}}</button>
+                <button color="primary" (click)="answerQuestion(true)" mat-raised-button>{{survey.antwoord1}}</button>
+                <button (click)="answerQuestion(false)" mat-raised-button>{{survey.antwoord2}}</button>
             </mat-card-content>
+            <p>Antwoord 1 count: {{survey.countAntwoord1}}</p>
+            <p>Antwoord 2 count: {{survey.countAntwoord2}}</p>
         </div>
     </div>
     <div class="divider"></div>
@@ -26,14 +28,11 @@
                     <mat-icon mat-list-icon>account_circle</mat-icon>
                     <h4 mat-line>{{comment.user.username}}</h4>
                 </div>
-                <div>
-                    <button mat-icon-button>
-                        <i class="material-icons up">thumb_up</i>
+                <div  fxLayoutAlign="start center">
+                    <button mat-icon-button (click)="like(comment);" >
+                        <i class="material-icons" [ngClass]="{'up': comment.liked}">thumb_up</i>
                     </button>
-                    <button mat-icon-button>
-                        <i class="material-icons down">thumb_down</i>
-                    </button>
-                    <p class="counter">+ 27</p>
+                    <p class="counter">{{comment.likes.length}}</p>
                 </div>
             </div>
             <p>{{comment.comment}}</p>

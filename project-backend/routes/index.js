@@ -45,8 +45,8 @@ router.get('/API/survey', auth, function (req, res, next) {
     Survey.findOne().skip(random)
       .populate({
         path: 'comments',
-        select: 'user comment',
-        populate: { path: 'user', select: 'username' }
+        select: 'user comment likes',
+        populate: { path: 'user likes', select: 'username' }
       })
       .exec(function (err, survey) {
         if (err) { return next(err); }
@@ -63,6 +63,28 @@ router.post('/API/surveys', auth, function (req, res, next) {
     res.json(survey);
   })
 });
+
+/* Answer survey */
+router.put('/API/survey/:id/answer', auth, function (req, res, next) {
+  if (req.body.numberAnswer == 1) {
+    Survey.findOneAndUpdate({ _id: req.params.id },
+      { $inc: { 'countAntwoord1': 1 } },
+      {new: true},
+      function (err, survey) {
+        if (err) { return next(err) }
+        res.json(survey.countAntwoord1)
+      })
+  } else {
+    Survey.findOneAndUpdate({ _id: req.params.id },
+      { $inc: { 'countAntwoord2': 1 } },
+      {new: true},
+      function (err, survey) {
+        if (err) { return next(err) }
+        res.json(survey.countAntwoord2)
+      })
+  }
+
+})
 
 /* GET comments */
 router.get('/API/comments', function (req, res, next) {
@@ -90,9 +112,25 @@ router.post('/API/survey/:id/comments', auth, function (req, res, next) {
     })
 });
 
+/* Like */
+router.put('/API/comment/:id/like', auth, function (req, res, next) {
+  Comment.update({ _id: req.params.id },
+    { $addToSet: { likes: req.payload._id } },
+    function (err, raw) {
+      if (err) { return next(err); }
+      res.json(req.payload._id);
+    })
+});
 
-
-router.patch('/API/comment/:id/upvote')
+/* Unlike */
+router.put('/API/comment/:id/unlike', auth, function (req, res, next) {
+  Comment.update({ _id: req.params.id },
+    { $pull: { likes: req.payload._id } },
+    function (err, raw) {
+      if (err) { return next(err); }
+      res.json(req.payload._id);
+    })
+});
 
 //AUTH
 router.post('/register', function (req, res, next) {
