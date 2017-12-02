@@ -1,0 +1,18 @@
+.chart {
+    display: block;
+    height: 250px;
+}
+
+.mat-card h2, .mat-card p {
+    margin: 0;
+}
+
+.first {
+    background-color: #2663ff;
+    color: white;
+}
+
+.second {
+    background-color: #f44542;
+    color: white;
+}

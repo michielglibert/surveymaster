@@ -10,6 +10,8 @@ import { AppRouteModule } from './modules/app-routing/app-routing.module';
 import { MaterialModule } from './modules/material.module';
 import { LoginDialogComponent } from './login-dialog/login-dialog.component';
 import { FormsModule } from '@angular/forms';
+import { AuthenticationService } from './modules/user/authentication.service';
+import { AuthGuardService } from './modules/user/auth-guard.service';
 
 
 @NgModule({
@@ -33,7 +35,10 @@ import { FormsModule } from '@angular/forms';
   entryComponents: [
     LoginDialogComponent
   ],
-  providers: [],
+  providers: [
+    AuthenticationService,
+    AuthGuardService
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

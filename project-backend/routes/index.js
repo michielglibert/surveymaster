@@ -38,7 +38,7 @@ router.get('/API/survey/:id/comments', function (req, res, next) {
 });
 
 /* GET survey */
-router.get('/API/survey', auth, function (req, res, next) {
+router.get('/API/survey', function (req, res, next) {
   Survey.count().exec(function (err, count) {
     var random = Math.floor(Math.random() * count)
 
@@ -66,25 +66,41 @@ router.post('/API/surveys', auth, function (req, res, next) {
 
 /* Answer survey */
 router.put('/API/survey/:id/answer', auth, function (req, res, next) {
-  if (req.body.numberAnswer == 1) {
-    Survey.findOneAndUpdate({ _id: req.params.id },
-      { $inc: { 'countAntwoord1': 1 } },
-      {new: true},
-      function (err, survey) {
-        if (err) { return next(err) }
-        res.json(survey.countAntwoord1)
-      })
-  } else {
-    Survey.findOneAndUpdate({ _id: req.params.id },
-      { $inc: { 'countAntwoord2': 1 } },
-      {new: true},
-      function (err, survey) {
-        if (err) { return next(err) }
-        res.json(survey.countAntwoord2)
-      })
-  }
-
-})
+  let user = User.findById(req.payload._id, function(err, user) {
+    if (err) { return next(err) }
+    //if (user.answeredSurveys.indexOf(req.params.id) === -1) {
+      if (req.body.numberAnswer == 1) {
+        Survey.findOneAndUpdate({ _id: req.params.id },
+          { $inc: { 'countAntwoord1': 1 } },
+          { new: true },
+          function (err, survey) {
+            if (err) { return next(err) }
+            User.findByIdAndUpdate(req.payload._id,
+              { $addToSet: { answeredSurveys: req.params.id } },
+              function (err, user) {
+                if (err) { return next(err) }
+              })
+            res.json(survey)
+          });
+      } else {
+        Survey.findOneAndUpdate({ _id: req.params.id },
+          { $inc: { 'countAntwoord2': 1 } },
+          { new: true },
+          function (err, survey) {
+            if (err) { return next(err) }
+            User.findByIdAndUpdate(req.payload._id,
+              { $addToSet: { answeredSurveys: req.params.id } },
+              function (err, user) {
+                if (err) { return next(err) }
+              });
+            res.json(survey)
+          });
+      }
+    //} else {
+      //res.sendStatus(200);
+    //}
+  });
+});
 
 /* GET comments */
 router.get('/API/comments', function (req, res, next) {

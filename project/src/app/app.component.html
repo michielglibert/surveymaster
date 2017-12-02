@@ -26,16 +26,17 @@
         <button routerLinkActive="active" [routerLink]="['/survey']" mat-button>Survey</button>
       </div>
       <div fxLayoutGap="16px">
-        <button routerLinkActive="active" [routerLink]="['/user/profile']" mat-button>Profile</button>
-        <button [routerLink]="['/user/login']" mat-button>Login</button>
-        <button (click)="openDialog()" mat-button>Login</button>
-        <button (click)="logout()" mat-button>Logout</button>
+        <button *ngIf="!this.authService.user$.value" [routerLink]="['/user/login']" mat-button>Login</button>
+        <div *ngIf="this.authService.user$.value">
+          <button routerLinkActive="active" [routerLink]="['/user/profile']" mat-button>Profile</button>
+          <button  (click)="logout()" mat-button>Logout</button>
+        </div>
       </div>
     </div>
   </mat-toolbar>
 
-  <div fxLayout="column" *ngIf="loading" fxLayoutAlign="center center" >
-    <mat-spinner fxFlexOffset="150px" ></mat-spinner>
+  <div fxLayout="column" *ngIf="loading" fxLayoutAlign="center center">
+    <mat-spinner fxFlexOffset="150px"></mat-spinner>
   </div>
 
   <div class="container" *ngIf="!loading">

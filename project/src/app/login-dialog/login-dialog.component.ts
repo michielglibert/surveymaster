@@ -26,7 +26,7 @@ export class LoginDialogComponent implements OnInit {
       this.authService.login(this.username, this.password).subscribe(val => {
         if (val) {
           this.dialogRef.close();
-        }        
+        }
       }, err => this.errorMessage = err.error.message);
     }
   }

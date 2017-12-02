@@ -9,12 +9,14 @@ import { MaterialModule } from "../material.module";
 import { FlexLayoutModule } from "@angular/flex-layout";
 import { SurveyResolver } from "./survey.resolver";
 import { FormsModule } from "@angular/forms";
+import { ChartsModule } from 'ng2-charts/ng2-charts';
+import { AuthenticationService } from "../user/authentication.service";
+import { AuthGuardService } from "../user/auth-guard.service";
 
 
 const routes = [
     { path: '', component: SurveyComponent, resolve: { survey: SurveyResolver } },
-    { path: 'addsurvey', component: SurveyComponent },
-    { path: 'surveyresult', component: SurveyComponent }
+    { path: 'addsurvey', component: SurveyComponent, canActivate: [AuthGuardService] }
 ];
 
 @NgModule({
@@ -23,7 +25,8 @@ const routes = [
         FlexLayoutModule,
         RouterModule.forChild(routes),
         MaterialModule,
-        FormsModule
+        FormsModule,
+        ChartsModule
     ],
     declarations: [
         SurveyComponent,

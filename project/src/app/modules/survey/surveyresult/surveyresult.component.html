@@ -1,3 +1,21 @@
-<p>
-  surveyresult works!
-</p>
+<div fxLayout="column" fxLayoutGap="16px">
+    <div fxLayout.lt-sm="column" fxLayoutGap="16px">
+        <mat-card class="first" fxLayout="column" fxFlex="50" fxLayoutAlign="center center">
+            <h2>{{doughnutChartLabels[1]}}</h2>
+            <div class="divider"></div>
+            <p>{{doughnutChartData[1]}} other people chose this answer</p>
+            <h3>{{getPercentageOfAnswer(doughnutChartData[1])}}</h3>
+        </mat-card>
+        <mat-card class="second" fxLayout="column" fxFlex="50" fxLayoutAlign="center center">
+                <h2>{{doughnutChartLabels[0]}}</h2>
+                <div class="divider"></div>
+                <p>{{doughnutChartData[0]}} other people chose this answer</p>
+                <h3>{{getPercentageOfAnswer(doughnutChartData[0])}}</h3>
+        </mat-card>
+    </div>
+    <div class="divider"></div>
+    <div fxHide.lt-sm class="chart">
+        <canvas baseChart #baseChart="base-chart" [data]="doughnutChartData" [labels]="doughnutChartLabels" [chartType]="doughnutChartType"
+            [options]="doughnutChartOptions" [colors]="doughnutChartColors" (chartHover)="chartHovered($event)" (chartClick)="chartClicked($event)"></canvas>
+    </div>
+</div>

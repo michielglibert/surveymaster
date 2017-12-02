@@ -12,6 +12,7 @@ var mongoURI = 'mongodb://user:notasafepass@ds121726.mlab.com:21726/surveymaster
 
 require('./models/user');
 require('./models/survey');
+require('./models/comment');
 
 
 var index = require('./routes/index');

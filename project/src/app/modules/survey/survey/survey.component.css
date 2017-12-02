@@ -64,3 +64,13 @@ mat-form-field {
 textarea {
     resize: none !important;
 }
+
+.first {
+    color: white;
+    background-color: #2663ff;
+}
+
+.second {
+    color:white;
+    background-color: #f44542;
+}

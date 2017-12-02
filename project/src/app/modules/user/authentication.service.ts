@@ -55,12 +55,13 @@ export class AuthenticationService {
   }
 
   logout() {
-    if(this.user$.getValue()) {
+    console.log(this.user$.value)
+    if(this.user$.value) {
       localStorage.removeItem('currentUser');
       setTimeout(() => this._user$.next(null));
     }
   }
-
+  
 }
 
 interface TokenResponse {

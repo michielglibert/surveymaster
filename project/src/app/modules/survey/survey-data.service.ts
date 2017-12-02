@@ -3,17 +3,25 @@ import { Observable } from 'rxjs/Observable';
 import { Survey } from '../../models/survey.model';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Comment } from '../../models/comment.model';
+import { AuthenticationService } from '../user/authentication.service';
 
 @Injectable()
 export class SurveyDataService {
   private readonly _url = 'http://localhost:3000/';
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient,
+  private authService:AuthenticationService) { }
 
-  getSurvey(): Observable<Survey> {
-    const currentUser = JSON.parse(localStorage.getItem('currentUser'));
-    return this.http.get<Survey>(this._url + 'API/survey',
+  getSurvey(): Observable<Survey> { 
+    console.log(this.authService.user$.value)
+    if (this.authService.user$.value) {
+      const currentUser = JSON.parse(localStorage.getItem('currentUser'));
+      return this.http.get<Survey>(this._url + 'API/survey',
       { headers: new HttpHeaders().set('Authorization', 'Bearer ' + currentUser.token) });
+    } else {
+      return this.http.get<Survey>(this._url + 'API/survey');
+    }
+   
   }
 
   addCommentToSurvey(surveyId, comment): Observable<Comment> {
@@ -22,9 +30,9 @@ export class SurveyDataService {
       { headers: new HttpHeaders().set('Authorization', 'Bearer ' + currentUser.token) });
   }
 
-  answerSurvey(surveyId, answer): Observable<number> {
+  answerSurvey(surveyId, answer): Observable<Survey> {
     const currentUser = JSON.parse(localStorage.getItem('currentUser'));
-    return this.http.put<number>(this._url + 'API/survey/' + surveyId + '/answer', { numberAnswer: answer },
+    return this.http.put<Survey>(this._url + 'API/survey/' + surveyId + '/answer', { numberAnswer: answer },
       { headers: new HttpHeaders().set('Authorization', 'Bearer ' + currentUser.token) });
   }
 
