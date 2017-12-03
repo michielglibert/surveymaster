@@ -31,6 +31,7 @@
                 <div fxLayoutAlign="start center">
                     <mat-icon mat-list-icon>account_circle</mat-icon>
                     <h4 mat-line>{{comment.user.username}}</h4>
+                    <i>- {{comment.posted | date: 'dd/MM/yyyy (H:m)'}}</i>
                 </div>
                 <div fxLayoutAlign="start center">
                     <button mat-icon-button (click)="like(comment);">

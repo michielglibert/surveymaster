@@ -18,6 +18,12 @@ body {
     padding: 16px;
 }
 
+.extrasmallcontainer {
+    max-width: 500px;
+    margin: 0px auto;
+    padding: 16px;
+}
+
 .divider {
     display: block;
     height: 1px;

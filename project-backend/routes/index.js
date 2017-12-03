@@ -45,7 +45,7 @@ router.get('/API/survey', function (req, res, next) {
     Survey.findOne().skip(random)
       .populate({
         path: 'comments',
-        select: 'user comment likes',
+        select: 'user comment likes posted',
         populate: { path: 'user likes', select: 'username' }
       })
       .exec(function (err, survey) {
@@ -66,38 +66,38 @@ router.post('/API/surveys', auth, function (req, res, next) {
 
 /* Answer survey */
 router.put('/API/survey/:id/answer', auth, function (req, res, next) {
-  let user = User.findById(req.payload._id, function(err, user) {
+  let user = User.findById(req.payload._id, function (err, user) {
     if (err) { return next(err) }
     //if (user.answeredSurveys.indexOf(req.params.id) === -1) {
-      if (req.body.numberAnswer == 1) {
-        Survey.findOneAndUpdate({ _id: req.params.id },
-          { $inc: { 'countAntwoord1': 1 } },
-          { new: true },
-          function (err, survey) {
-            if (err) { return next(err) }
-            User.findByIdAndUpdate(req.payload._id,
-              { $addToSet: { answeredSurveys: req.params.id } },
-              function (err, user) {
-                if (err) { return next(err) }
-              })
-            res.json(survey)
-          });
-      } else {
-        Survey.findOneAndUpdate({ _id: req.params.id },
-          { $inc: { 'countAntwoord2': 1 } },
-          { new: true },
-          function (err, survey) {
-            if (err) { return next(err) }
-            User.findByIdAndUpdate(req.payload._id,
-              { $addToSet: { answeredSurveys: req.params.id } },
-              function (err, user) {
-                if (err) { return next(err) }
-              });
-            res.json(survey)
-          });
-      }
+    if (req.body.numberAnswer == 1) {
+      Survey.findOneAndUpdate({ _id: req.params.id },
+        { $inc: { 'countAntwoord1': 1 } },
+        { new: true },
+        function (err, survey) {
+          if (err) { return next(err) }
+          User.findByIdAndUpdate(req.payload._id,
+            { $addToSet: { answeredSurveys: req.params.id } },
+            function (err, user) {
+              if (err) { return next(err) }
+            })
+          res.json(survey)
+        });
+    } else {
+      Survey.findOneAndUpdate({ _id: req.params.id },
+        { $inc: { 'countAntwoord2': 1 } },
+        { new: true },
+        function (err, survey) {
+          if (err) { return next(err) }
+          User.findByIdAndUpdate(req.payload._id,
+            { $addToSet: { answeredSurveys: req.params.id } },
+            function (err, user) {
+              if (err) { return next(err) }
+            });
+          res.json(survey)
+        });
+    }
     //} else {
-      //res.sendStatus(200);
+    //res.sendStatus(200);
     //}
   });
 });
@@ -110,23 +110,56 @@ router.get('/API/comments', function (req, res, next) {
   })
 });
 
+/* GET Comments by user */
+router.get('/API/user/comments', auth, function (req, res, next) {
+  Comment.find({ user: req.payload._id }).populate('user', 'username').exec(function (err, surveys) {
+    if (err) { return next(err); }
+    res.json(surveys);
+  })
+});
+
 /* POST comment for survey*/
 router.post('/API/survey/:id/comments', auth, function (req, res, next) {
-  let comment = new Comment({ user: req.payload._id, comment: req.body.comment });
+  let comment = new Comment({ survey: req.params.id, user: req.payload._id, comment: req.body.comment });
 
   Survey.update({ _id: req.params.id },
     { $push: { 'comments': comment } },
     function (err, raw) {
-      if (err) { return next(err) };
-      comment.save(function (err, comment) {
-        if (err) { return next(err); }
-        Comment.populate(comment, 'user', function (err, comment) {
-          if (err) { return next(err); }
-          res.json(comment);
+      User.update({ _id: req.payload._id },
+        { $push: { 'comments': comment } },
+        function (err, raw) {
+          if (err) { return next(err) };
+          comment.save(function (err, comment) {
+            if (err) { return next(err); }
+            Comment.populate(comment, 'user', function (err, comment) {
+              if (err) { return next(err); }
+              res.json(comment);
+            });
+          })
         });
-      })
     })
 });
+
+/* GET user */
+router.get('/API/user', auth, function (req, res, next) {
+  User.findById(req.payload._id, 'username')
+    .populate({
+      path: 'comments',
+      select: 'comment likes survey posted',
+      populate: { path: 'likes survey', select: 'username vraag' }
+    })
+    .populate({
+      path: 'answeredSurveys'
+    })
+    .populate({
+      path: 'surveys'
+    })
+    .exec(function (err, user) {
+      if (err) { return next(err); }
+      res.json(user);
+    })
+});
+
 
 /* Like */
 router.put('/API/comment/:id/like', auth, function (req, res, next) {

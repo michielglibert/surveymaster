@@ -26,7 +26,11 @@
         <button routerLinkActive="active" [routerLink]="['/survey']" mat-button>Survey</button>
       </div>
       <div fxLayoutGap="16px">
-        <button *ngIf="!this.authService.user$.value" [routerLink]="['/user/login']" mat-button>Login</button>
+        <div *ngIf="!this.authService.user$.value" >
+            <button [routerLink]="['/user/register']" mat-button>Register</button>
+            <button [routerLink]="['/user/login']" mat-button>Login</button>
+        </div>
+        
         <div *ngIf="this.authService.user$.value">
           <button routerLinkActive="active" [routerLink]="['/user/profile']" mat-button>Profile</button>
           <button  (click)="logout()" mat-button>Logout</button>

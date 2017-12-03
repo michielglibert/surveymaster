@@ -8,7 +8,7 @@ var UserSchema = new mongoose.Schema({
     salt: String,
     surveys: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Survey'}],
     answeredSurveys: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Survey'}],
-    ownedSurveys: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Survey'}]
+    comments: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Comment' }]
 });
 
 UserSchema.methods.setPassword = function (password) {

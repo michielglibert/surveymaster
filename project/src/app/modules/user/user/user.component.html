@@ -4,5 +4,21 @@
       <i class="material-icons">account_box</i>
       <h1>Michiel6661</h1>
     </mat-card-header>
+    <mat-tab-group mat-stretch-tabs="always">
+      <mat-tab label="Submitted surveys">Content 1</mat-tab>
+      <mat-tab label="Answered surveys">Content 2</mat-tab>
+      <mat-tab label="Comments">
+        <mat-list>
+          <div *ngFor="let comment of user.comments">
+            <mat-list-item>
+              <i mat-list-icon class="material-icons">comment</i>
+              <h2 mat-line><b>On survey "{{comment.survey.vraag}}"</b> - {{comment.posted | date: 'dd/MM/yyyy (H:m)'}}</h2>
+              <p mat-line>{{comment.comment}}</p>
+            </mat-list-item>
+            <mat-divider></mat-divider>
+          </div>
+        </mat-list>
+      </mat-tab>
+    </mat-tab-group>
   </mat-card>
 </div>

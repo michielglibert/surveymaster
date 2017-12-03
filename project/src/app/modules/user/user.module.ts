@@ -11,9 +11,10 @@ import { AuthenticationService } from './authentication.service';
 import { LogoutComponent } from './logout/logout.component';
 import { LoginComponent } from './login/login.component';
 import { AuthGuardService } from './auth-guard.service';
+import { UserResolver } from './user.resolver';
 
 const routes = [
-    { path: 'profile', component: UserComponent, canActivate: [AuthGuardService]},
+    { path: 'profile', component: UserComponent, canActivate: [AuthGuardService], resolve: {user: UserResolver}},
     { path: 'login', component: LoginComponent},
     { path: 'register', component: RegisterComponent},
     { path: 'logout', component: LogoutComponent, canActivate: [AuthGuardService]}
@@ -34,7 +35,8 @@ const routes = [
         LoginComponent     
     ],
     providers: [
-        UserDataService
+        UserDataService,
+        UserResolver
     ]
 })
 

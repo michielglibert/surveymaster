@@ -9,7 +9,8 @@ import {
   MatProgressSpinnerModule,
   MatListModule,
   MatDialogModule,
-  MatTabsModule
+  MatTabsModule,
+  MatExpansionModule
 } from '@angular/material';
 import { NgModule } from '@angular/core';
 
@@ -25,7 +26,8 @@ import { NgModule } from '@angular/core';
     MatProgressSpinnerModule,
     MatListModule,
     MatDialogModule,
-    MatTabsModule
+    MatTabsModule,
+    MatExpansionModule
   ],
   exports: [
     MatButtonModule,
@@ -38,7 +40,8 @@ import { NgModule } from '@angular/core';
     MatProgressSpinnerModule,
     MatListModule,
     MatDialogModule,
-    MatTabsModule
+    MatTabsModule,
+    MatExpansionModule
   ],
 })
 export class MaterialModule { }
