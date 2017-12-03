@@ -1,55 +1,74 @@
 <mat-card>
-    <div *ngIf="!showResult">
-        <div class="header" fxLayoutAlign="center center">
-            <h1>{{survey.vraag}}</h1>
-        </div>
-        <mat-card-content fxLayout.xs="column" fxLayoutGap.xs="16px" fxLayoutAlign="space-evenly center">
-            <button class="first" (click)="answerQuestion(1)" mat-raised-button>{{survey.antwoord1}}</button>
-            <p>or</p>
-            <button class="second" (click)="answerQuestion(2)" mat-raised-button>{{survey.antwoord2}}</button>
-        </mat-card-content>
+    <div *ngIf="survey===null">
+        <p>Sorry, you answered all surveys for the moment.</p>
     </div>
-    <div *ngIf="showResult">
-        <app-surveyresult [survey]="survey"></app-surveyresult>
-    </div>
-    <div class="divider"></div>
-    <div fxLayoutAlign="center center">
-        <button *ngIf="!showResult" class="test" mat-raised-button [disabled]="loading" (click)="skipQuestion()">Skip question
-            <mat-spinner *ngIf="loading" [diameter]="20"></mat-spinner>
-        </button>
-        <button *ngIf="showResult" mat-raised-button (click)="skipQuestion()">Next question</button>
-    </div>
-</mat-card>
-<mat-card>
-    <h2>Comments</h2>
-    <div class="comments">
-        <div *ngIf="!survey.comments.length" fxLayoutAlign="center center">
-            <p>There is nothing here :(</p>
-        </div>
-        <div *ngFor="let comment of survey.comments; let index = index" class="comment">
-            <div fxLayoutAlign="space-between center">
-                <div fxLayoutAlign="start center">
-                    <mat-icon mat-list-icon>account_circle</mat-icon>
-                    <h4 mat-line>{{comment.user.username}}</h4>
-                    <i>- {{comment.posted | date: 'dd/MM/yyyy (H:m)'}}</i>
-                </div>
-                <div fxLayoutAlign="start center">
-                    <button mat-icon-button (click)="like(comment);">
-                        <i class="material-icons" [ngClass]="{'up': comment.liked}">thumb_up</i>
-                    </button>
-                    <p class="counter">{{comment.likes.length}}</p>
-                </div>
+    <div *ngIf="survey!==null">
+        <div *ngIf="!showResult && !survey.answered">
+            <div class="header" fxLayoutAlign="center center">
+                <h1>{{survey.vraag}}</h1>
             </div>
-            <p>{{comment.comment}}</p>
-            <div *ngIf="index+1!==survey.comments.length" class="divider"></div>
+            <mat-card-content fxLayout.xs="column" fxLayoutGap.xs="16px" fxLayoutAlign="space-evenly center">
+                <button class="first" (click)="answerQuestion(1)" mat-raised-button>{{survey.antwoord1}}</button>
+                <p>or</p>
+                <button class="second" (click)="answerQuestion(2)" mat-raised-button>{{survey.antwoord2}}</button>
+            </mat-card-content>
+        </div>
+        <div *ngIf="showResult || survey.answered">
+            <app-surveyresult [survey]="survey"></app-surveyresult>
+        </div>
+
+        <div *ngIf="showResult" fxLayout="column" fxLayoutAlign="center center">
+            <div class="divider"></div>
+            <div fxLayout="row" fxLayoutGap="64px">
+                <button mat-button ngxClipboard [cbContent]="shareUrl" (cbOnSuccess)="showSnackbar('Copied to clipboard', 'Dismiss')">Share this survey&nbsp;
+                    <i class="material-icons">share</i>
+                </button>
+                <button mat-raised-button (click)="skipQuestion()">Next question</button>
+            </div>
+        </div>
+        <div *ngIf="survey.answered" fxLayout="column" fxLayoutAlign="center center">
+            <div class="divider"></div>
+            <div fxLayout="row" fxLayoutGap="64px">
+                <button mat-button ngxClipboard [cbContent]="shareUrl" (cbOnSuccess)="showSnackbar('Copied to clipboard', 'Dismiss')">Share this survey&nbsp;
+                    <i class="material-icons">share</i>
+                </button>
+                <button mat-raised-button (click)="skipQuestion()">More questions</button>
+            </div>
         </div>
     </div>
-    <div *ngIf="authService.user$.value">
-        <form #form="ngForm" (ngSubmit)="addComment(form)">
-            <mat-form-field>
-                <textarea rows="5" matInput placeholder="comment" [(ngModel)]="newComment" name="newComment" required></textarea>
-            </mat-form-field>
-            <button type="submit" mat-button>Post</button>
-        </form>
-    </div>
 </mat-card>
+<div *ngIf="survey!==null">
+    <mat-card>
+        <h2 id="comments">Comments</h2>
+        <div class="comments">
+            <div *ngIf="!survey.comments.length" fxLayoutAlign="center center">
+                <p>There is nothing here :(</p>
+            </div>
+            <div *ngFor="let comment of survey.comments; let index = index" class="comment">
+                <div fxLayoutAlign="space-between center">
+                    <div fxLayoutAlign="start center">
+                        <mat-icon mat-list-icon>account_circle</mat-icon>
+                        <h4 mat-line>{{comment.user.username}}</h4>
+                        <i>- {{comment.posted | date: 'dd/MM/yyyy (HH:mm)'}}</i>
+                    </div>
+                    <div fxLayoutAlign="start center">
+                        <button mat-icon-button (click)="like(comment);">
+                            <i class="material-icons" [ngClass]="{'up': comment.liked}">thumb_up</i>
+                        </button>
+                        <p class="counter">{{comment.likes.length}}</p>
+                    </div>
+                </div>
+                <p>{{comment.comment}}</p>
+                <div *ngIf="index+1!==survey.comments.length" class="divider"></div>
+            </div>
+        </div>
+        <div *ngIf="authService.user$.value">
+            <form #form="ngForm" (ngSubmit)="addComment(form)">
+                <mat-form-field>
+                    <textarea rows="5" matInput placeholder="comment" [(ngModel)]="newComment" name="newComment" required></textarea>
+                </mat-form-field>
+                <button type="submit" mat-button>Post</button>
+            </form>
+        </div>
+    </mat-card>
+</div>

@@ -1,8 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { User } from '../../../models/user.model';
 import { UserDataService } from '../user-data.service';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Comment } from '../../../models/comment.model';
+import { Survey } from '../../../models/survey.model';
+import { SurveyDataService } from '../../survey/survey-data.service';
 
 @Component({
   selector: 'app-user',
@@ -13,15 +15,21 @@ export class UserComponent implements OnInit {
   private _user: User;
 
   constructor(private userData: UserDataService,
-    private route: ActivatedRoute, ) { }
+    private route: ActivatedRoute,
+    private router: Router) { }
 
   ngOnInit() {
     this.route.data.subscribe(item => {
       this._user = item['user'];
-      this.user.comments.sort((a, b) =>{
+      this.user.comments.sort((a, b) => {
         return new Date(b.posted).getTime() - new Date(a.posted).getTime();
       })
     });
+  }
+
+  showSurvey(survey: Survey) {
+    console.log('oy')
+    this.router.navigate(['/survey/' + survey._id]);
   }
 
   get user(): User {

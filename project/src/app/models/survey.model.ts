@@ -8,6 +8,7 @@ export class Survey {
     private _comments:Comment[];
     countAntwoord1:number;
     countAntwoord2:number;
+    answerd:boolean;
 
     constructor() {}
 

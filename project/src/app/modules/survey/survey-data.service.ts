@@ -7,21 +7,28 @@ import { AuthenticationService } from '../user/authentication.service';
 
 @Injectable()
 export class SurveyDataService {
-  private readonly _url = 'http://localhost:3000/';
+  //private readonly _url = 'http://localhost:3000/';
+  private readonly _url = 'https://surveyymaster.herokuapp.com/';
 
   constructor(private http: HttpClient,
-  private authService:AuthenticationService) { }
+    private authService: AuthenticationService) { }
 
-  getSurvey(): Observable<Survey> { 
-    console.log(this.authService.user$.value)
-    if (this.authService.user$.value) {
-      const currentUser = JSON.parse(localStorage.getItem('currentUser'));
-      return this.http.get<Survey>(this._url + 'API/survey',
+  getRandomSurvey(): Observable<Survey> {
+    const currentUser = JSON.parse(localStorage.getItem('currentUser'));
+    return this.http.get<Survey>(this._url + 'API/survey',
       { headers: new HttpHeaders().set('Authorization', 'Bearer ' + currentUser.token) });
-    } else {
-      return this.http.get<Survey>(this._url + 'API/survey');
-    }
-   
+  }
+
+  getSurveyById(surveyId): Observable<Survey> {
+    const currentUser = JSON.parse(localStorage.getItem('currentUser'));
+    return this.http.get<Survey>(this._url + 'API/survey/' + surveyId ,
+      { headers: new HttpHeaders().set('Authorization', 'Bearer ' + currentUser.token) });
+  }
+
+  newSurvey(survey:Survey):Observable<Survey> {
+    const currentUser = JSON.parse(localStorage.getItem('currentUser'));
+    return this.http.post<Survey>(this._url + 'API/surveys', survey,
+      { headers: new HttpHeaders().set('Authorization', 'Bearer ' + currentUser.token) });
   }
 
   addCommentToSurvey(surveyId, comment): Observable<Comment> {

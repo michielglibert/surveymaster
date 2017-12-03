@@ -2,21 +2,49 @@
   <mat-card>
     <mat-card-header fxLayoutAlign="start center" fxLayoutGap="32px">
       <i class="material-icons">account_box</i>
-      <h1>Michiel6661</h1>
+      <h1>{{user.username}}</h1>
     </mat-card-header>
     <mat-tab-group mat-stretch-tabs="always">
-      <mat-tab label="Submitted surveys">Content 1</mat-tab>
-      <mat-tab label="Answered surveys">Content 2</mat-tab>
+      <mat-tab label="Submitted surveys">
+        <mat-list>
+          <div *ngFor="let survey of user.surveys">
+            <mat-list-item (click)="showSurvey(survey)">
+              <i mat-list-icon class="material-icons">poll</i>
+              <h2 mat-line>
+                <b>{{survey.vraag}}</b>
+              </h2>
+            </mat-list-item>
+            <mat-divider></mat-divider>
+          </div>
+          <div *ngIf="user.surveys.length === 0"><h4>There seems to be nothing here...</h4></div>
+        </mat-list>
+      </mat-tab>
+      <mat-tab label="Answered surveys">
+        <mat-list>
+          <div *ngFor="let survey of user.answeredSurveys">
+            <mat-list-item (click)="showSurvey(survey)">
+              <i mat-list-icon class="material-icons">poll</i>
+              <h2 mat-line>
+                <b>{{survey.vraag}}</b>
+              </h2>
+            </mat-list-item>
+            <mat-divider></mat-divider>
+          </div>
+          <div *ngIf="user.answeredSurveys.length === 0"><h4>There seems to be nothing here...</h4></div>
+        </mat-list>
+      </mat-tab>
       <mat-tab label="Comments">
         <mat-list>
           <div *ngFor="let comment of user.comments">
-            <mat-list-item>
+            <mat-list-item (click)="showSurvey(comment.survey)">
               <i mat-list-icon class="material-icons">comment</i>
-              <h2 mat-line><b>On survey "{{comment.survey.vraag}}"</b> - {{comment.posted | date: 'dd/MM/yyyy (H:m)'}}</h2>
+              <h2 mat-line>
+                <b>On survey "{{comment.survey.vraag}}"</b> - {{comment.posted | date: 'dd/MM/yyyy (HH:mm)'}}</h2>
               <p mat-line>{{comment.comment}}</p>
             </mat-list-item>
             <mat-divider></mat-divider>
           </div>
+          <div *ngIf="user.comments.length === 0"><h4>There seems to be nothing here...</h4></div>
         </mat-list>
       </mat-tab>
     </mat-tab-group>

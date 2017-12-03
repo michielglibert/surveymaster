@@ -3,6 +3,13 @@
     height: 250px;
 }
 
+.question {
+    width: 100%;
+    text-align: center;
+    margin-top: 0;
+    margin-bottom: 24px !important;
+}
+
 .mat-card h2, .mat-card p {
     margin: 0;
 }

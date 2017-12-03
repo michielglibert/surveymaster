@@ -26,8 +26,7 @@ mat-card-content > button {
     border: 1px rgba(0, 0, 0, .12) solid;
 }
 
-.comment {
-    
+.comment {    
     margin: 0px 32px;
 }
 
@@ -37,7 +36,7 @@ mat-card-content > button {
 
 .comment p {
     margin-top: 8px;
-    margin-bottom: 0px;
+    margin-bottom: 8px;
     word-wrap: break-word;
 }
 

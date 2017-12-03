@@ -14,7 +14,7 @@ import { AuthGuardService } from './auth-guard.service';
 import { UserResolver } from './user.resolver';
 
 const routes = [
-    { path: 'profile', component: UserComponent, canActivate: [AuthGuardService], resolve: {user: UserResolver}},
+    { path: '', component: UserComponent, canActivate: [AuthGuardService], resolve: {user: UserResolver}},
     { path: 'login', component: LoginComponent},
     { path: 'register', component: RegisterComponent},
     { path: 'logout', component: LogoutComponent, canActivate: [AuthGuardService]}

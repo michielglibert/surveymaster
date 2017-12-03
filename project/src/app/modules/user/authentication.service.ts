@@ -6,7 +6,8 @@ import 'rxjs/add/operator/map';
 
 @Injectable()
 export class AuthenticationService {
-  private _url = 'http://localhost:3000/';
+  //private _url = 'http://localhost:3000/';
+  private readonly _url = 'https://surveyymaster.herokuapp.com/';
   private _user$: BehaviorSubject<string>;
   public redirectUrl;
 

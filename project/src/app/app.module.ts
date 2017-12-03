@@ -28,6 +28,7 @@ import { AuthGuardService } from './modules/user/auth-guard.service';
     //Eigen modules
     SurveyModule,
     UserModule,
+    SurveyModule,
     AppRouteModule,
     MaterialModule
     

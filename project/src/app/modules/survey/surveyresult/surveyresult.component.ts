@@ -65,4 +65,8 @@ export class SurveyresultComponent implements OnInit {
     return percentage + "%";
   }
 
+  get survey():Survey {
+    return this._survey;
+  }
+
 }

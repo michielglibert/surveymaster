@@ -1,0 +1,21 @@
+h1, h4 {
+    width: 100%;
+    text-align: center;
+}
+
+.loginbutton {
+    font-size: 18pt;
+}
+
+mat-horizontal-stepper {
+    max-width: 940px;
+    margin-top: 16px;
+}
+.buttons {
+    margin-top: 16px;
+}
+
+img {
+    max-width:100%;
+    max-height:100%;
+}

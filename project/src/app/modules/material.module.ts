@@ -10,9 +10,12 @@ import {
   MatListModule,
   MatDialogModule,
   MatTabsModule,
-  MatExpansionModule
+  MatExpansionModule,
+  MatSnackBarModule,
+  MatStepperModule
 } from '@angular/material';
 import { NgModule } from '@angular/core';
+import { HomeComponent } from './home/home/home.component';
 
 @NgModule({
   imports: [
@@ -27,7 +30,9 @@ import { NgModule } from '@angular/core';
     MatListModule,
     MatDialogModule,
     MatTabsModule,
-    MatExpansionModule
+    MatExpansionModule,
+    MatSnackBarModule,
+    MatStepperModule
   ],
   exports: [
     MatButtonModule,
@@ -41,7 +46,9 @@ import { NgModule } from '@angular/core';
     MatListModule,
     MatDialogModule,
     MatTabsModule,
-    MatExpansionModule
-  ],
+    MatExpansionModule,
+    MatSnackBarModule,
+    MatStepperModule
+  ]
 })
 export class MaterialModule { }

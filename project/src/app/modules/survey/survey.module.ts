@@ -12,11 +12,14 @@ import { FormsModule } from "@angular/forms";
 import { ChartsModule } from 'ng2-charts/ng2-charts';
 import { AuthenticationService } from "../user/authentication.service";
 import { AuthGuardService } from "../user/auth-guard.service";
+import { SurveyByIdResolver } from "./surveybyid.resolver";
+import { ClipboardModule } from 'ngx-clipboard';
 
 
 const routes = [
-    { path: '', component: SurveyComponent, resolve: { survey: SurveyResolver } },
-    { path: 'addsurvey', component: SurveyComponent, canActivate: [AuthGuardService] }
+    { path: 'survey', component: SurveyComponent, resolve: { survey: SurveyResolver }, canActivate: [AuthGuardService] },
+    { path: 'survey/:id', component: SurveyComponent, resolve: { survey: SurveyByIdResolver }, canActivate: [AuthGuardService] },
+    { path: 'addsurvey', component: AddsurveyComponent, canActivate: [AuthGuardService] }
 ];
 
 @NgModule({
@@ -26,7 +29,8 @@ const routes = [
         RouterModule.forChild(routes),
         MaterialModule,
         FormsModule,
-        ChartsModule
+        ChartsModule,
+        ClipboardModule
     ],
     declarations: [
         SurveyComponent,
@@ -35,7 +39,8 @@ const routes = [
     ],
     providers: [
         SurveyDataService,
-        SurveyResolver
+        SurveyResolver,
+        SurveyByIdResolver
     ]
 })
 

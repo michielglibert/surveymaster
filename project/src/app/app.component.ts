@@ -15,7 +15,7 @@ export class AppComponent {
 
   constructor(private router: Router,
     private route: ActivatedRoute,
-    private authService: AuthenticationService,
+    public authService: AuthenticationService,
     private dialog: MatDialog) {
 
     router.events

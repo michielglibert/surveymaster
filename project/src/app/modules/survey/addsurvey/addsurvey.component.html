@@ -1,3 +1,18 @@
-<p>
-  addsurvey works!
-</p>
+<div class="extrasmallcontainer">
+  <mat-card>
+      <h1>Submit a new survey</h1>
+      <div class="divider"></div>
+      <form #form="ngForm" (ngSubmit)="onSubmit(form)" fxLayout="column">
+        <mat-form-field>
+          <input matInput placeholder="Question" [(ngModel)]="vraag" name="vraag" required>
+        </mat-form-field>
+        <mat-form-field>
+          <input matInput placeholder="Answer 1" [(ngModel)]="antwoord1" name="antwoord1" required>
+        </mat-form-field>
+        <mat-form-field>
+          <input matInput placeholder="Answer 2" [(ngModel)]="antwoord2" name="antwoord2" required>
+        </mat-form-field>
+        <button color="primary" mat-raised-button>Submit new survey</button>
+      </form>
+  </mat-card>
+</div>

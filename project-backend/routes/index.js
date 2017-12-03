@@ -37,12 +37,58 @@ router.get('/API/survey/:id/comments', function (req, res, next) {
     })
 });
 
+/* GET random survey */
+router.get('/API/survey', auth, function (req, res, next) {
+  User.findById(req.payload._id, 'answeredSurveys', function (err, user) {
+    Survey.count({ _id: { $nin: user.answeredSurveys } }).exec(function (err, count) {
+      var random = Math.floor(Math.random() * count)
+
+      Survey.findOne({ _id: { $nin: user.answeredSurveys } }).skip(random)
+        .populate({
+          path: 'comments',
+          select: 'user comment likes posted',
+          populate: { path: 'user likes', select: 'username' }
+        })
+        .exec(function (err, survey) {
+          if (err) { return next(err); }
+          res.json(survey);
+        })
+    });
+  });
+});
+
+/* GET survey by ID */
+router.get('/API/survey/:id', auth, function (req, res, next) {
+  User.findById(req.payload._id, 'answeredSurveys', function (err, user) {
+    Survey.findById({ _id: req.params.id })
+      .populate({
+        path: 'comments',
+        select: 'user comment likes posted',
+        populate: { path: 'user likes', select: 'username' }
+      })
+      .lean()
+      .exec(function (err, survey) {
+        if (err) { return next(err); }
+        if(user.answeredSurveys.indexOf(survey._id) != -1) {
+          survey.answered = true;
+          console.log(survey.answered );
+        } else {
+          survey.answered = false;
+          console.log(false);
+          
+        }
+        console.log(survey);
+        res.json(survey);
+      })
+  });
+});
+
 /* GET survey */
-router.get('/API/survey', function (req, res, next) {
+/*router.get('/API/survey', function (req, res, next) {
   Survey.count().exec(function (err, count) {
     var random = Math.floor(Math.random() * count)
 
-    Survey.findOne().skip(random)
+    Survey.findOne({ _id: $nin }).skip(random)
       .populate({
         path: 'comments',
         select: 'user comment likes posted',
@@ -53,14 +99,18 @@ router.get('/API/survey', function (req, res, next) {
         res.json(survey);
       })
   });
-});
+});*/
 
 /* POST survey */
 router.post('/API/surveys', auth, function (req, res, next) {
   let survey = new Survey(req.body);
   survey.save(function (err, survey) {
     if (err) { return next(err); }
-    res.json(survey);
+    User.update({ _id: req.payload._id },
+      { $push: { surveys: survey } },
+      function (err, raw) {
+        res.json(survey);
+      });
   })
 });
 

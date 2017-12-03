@@ -22,7 +22,12 @@ h1 {
 }
 
 .mat-card-actions {
-    padding: 12px 48px 48px 48px !important;
+    padding: 12px 48px 0px 48px !important;
+    margin-bottom: 0px;
+}
+
+.register {
+    margin-bottom: 16px;
 }
 
 .container {
@@ -39,4 +44,16 @@ h1 {
 
 .mat-error {
     margin-left: 32px;
+}
+
+a {
+    color: black;
+    margin-top: 12px;
+    text-align: center;
+    font-size: 10pt;
+}
+
+a:hover {
+    cursor: pointer;
+    color:darkgray;
 }

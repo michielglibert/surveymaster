@@ -13,7 +13,11 @@ const appRoutes: Routes = [
         path: 'user',
         loadChildren: 'app/modules/user/user.module#UserModule'
     },
-    { path: '', redirectTo: 'survey', pathMatch: 'full' },
+    {
+        path: 'home',
+        loadChildren: 'app/modules/home/home.module#HomeModule'
+    },
+    { path: '', redirectTo: 'home', pathMatch: 'full' },
     { path: '**', component: PageNotFoundComponent }
 ];
 
