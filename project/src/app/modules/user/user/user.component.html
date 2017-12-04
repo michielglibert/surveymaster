@@ -16,7 +16,9 @@
             </mat-list-item>
             <mat-divider></mat-divider>
           </div>
-          <div *ngIf="user.surveys.length === 0"><h4>There seems to be nothing here...</h4></div>
+          <div *ngIf="user.surveys.length === 0">
+            <h4>There seems to be nothing here...</h4>
+          </div>
         </mat-list>
       </mat-tab>
       <mat-tab label="Answered surveys">
@@ -30,7 +32,9 @@
             </mat-list-item>
             <mat-divider></mat-divider>
           </div>
-          <div *ngIf="user.answeredSurveys.length === 0"><h4>There seems to be nothing here...</h4></div>
+          <div *ngIf="user.answeredSurveys.length === 0">
+            <h4>There seems to be nothing here...</h4>
+          </div>
         </mat-list>
       </mat-tab>
       <mat-tab label="Comments">
@@ -38,13 +42,17 @@
           <div *ngFor="let comment of user.comments">
             <mat-list-item (click)="showSurvey(comment.survey)">
               <i mat-list-icon class="material-icons">comment</i>
-              <h2 mat-line>
+              <h2 fxHide.lt-md  mat-line>
                 <b>On survey "{{comment.survey.vraag}}"</b> - {{comment.posted | date: 'dd/MM/yyyy (HH:mm)'}}</h2>
-              <p mat-line>{{comment.comment}}</p>
+              <h2 fxHide.gt-sm mat-line>
+                <b>On "{{comment.survey.vraag}}"</b></h2>
+              <p fxHide.gt-sm mat-line>{{comment.posted | date: 'dd/MM/yyyy (HH:mm)'}}</p>
             </mat-list-item>
             <mat-divider></mat-divider>
           </div>
-          <div *ngIf="user.comments.length === 0"><h4>There seems to be nothing here...</h4></div>
+          <div *ngIf="user.comments.length === 0">
+            <h4>There seems to be nothing here...</h4>
+          </div>
         </mat-list>
       </mat-tab>
     </mat-tab-group>

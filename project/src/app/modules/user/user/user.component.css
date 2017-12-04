@@ -11,3 +11,33 @@ mat-list-item:hover {
     background-color: rgba(0, 0, 0, .12);
     cursor: pointer;
 }
+
+@media screen and (max-width: 600px) {
+    mat-list-item i {
+        display: none;
+    }
+
+    ::ng-deep .mat-list-item-content {
+        padding: 0px !important;
+    }
+
+    ::ng-deep .mat-list-text {
+        padding: 2px !important;
+    }
+
+    i {
+        font-size: 40pt;
+    }
+
+    h2 {
+        font-size: 9pt !important;
+    }
+
+    p {
+        font-size: 9pt !important;
+    }
+
+    ::ng-deep .mat-tab-label {
+        font-size: 10pt !important;
+    }
+}

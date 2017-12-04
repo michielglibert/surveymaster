@@ -10,6 +10,7 @@ let Survey = mongoose.model('Survey');
 let User = mongoose.model('User');
 let Comment = mongoose.model('Comment')
 
+
 /* GET home page. */
 router.get('/', function (req, res, next) {
   res.render('index', { title: 'Express' });

@@ -16,23 +16,23 @@
         <div *ngIf="showResult || survey.answered">
             <app-surveyresult [survey]="survey"></app-surveyresult>
         </div>
-
-        <div *ngIf="showResult" fxLayout="column" fxLayoutAlign="center center">
-            <div class="divider"></div>
-            <div fxLayout="row" fxLayoutGap="64px">
-                <button mat-button ngxClipboard [cbContent]="shareUrl" (cbOnSuccess)="showSnackbar('Copied to clipboard', 'Dismiss')">Share this survey&nbsp;
-                    <i class="material-icons">share</i>
-                </button>
-                <button mat-raised-button (click)="skipQuestion()">Next question</button>
+        <div class="actions">
+            <div *ngIf="showResult" fxLayout="column" fxLayoutAlign="center center">
+                <div fxLayout="row" fxLayout.lt-sm="column" fxLayoutGap="64px" fxLayoutGap.lt-sm="16px">
+                    <button mat-button ngxClipboard [cbContent]="shareUrl" (cbOnSuccess)="showSnackbar('Copied to clipboard', 'Dismiss')">Share this survey&nbsp;
+                        <i class="material-icons">share</i>
+                    </button>
+                    <button mat-raised-button (click)="skipQuestion()">Next question</button>
+                </div>
             </div>
-        </div>
-        <div *ngIf="survey.answered" fxLayout="column" fxLayoutAlign="center center">
-            <div class="divider"></div>
-            <div fxLayout="row" fxLayoutGap="64px">
-                <button mat-button ngxClipboard [cbContent]="shareUrl" (cbOnSuccess)="showSnackbar('Copied to clipboard', 'Dismiss')">Share this survey&nbsp;
-                    <i class="material-icons">share</i>
-                </button>
-                <button mat-raised-button (click)="skipQuestion()">More questions</button>
+            <div *ngIf="survey.answered" fxLayout="column" fxLayoutAlign="center center">
+                <div fxLayout="row" fxLayout.lt-sm="column" fxLayoutGap="64px" fxLayoutGap.lt-sm="16px">
+
+                    <button mat-button ngxClipboard [cbContent]="shareUrl" (cbOnSuccess)="showSnackbar('Copied to clipboard', 'Dismiss')">Share this survey&nbsp;
+                        <i class="material-icons">share</i>
+                    </button>
+                    <button mat-raised-button (click)="skipQuestion()">More questions</button>
+                </div>
             </div>
         </div>
     </div>
@@ -49,7 +49,7 @@
                     <div fxLayoutAlign="start center">
                         <mat-icon mat-list-icon>account_circle</mat-icon>
                         <h4 mat-line>{{comment.user.username}}</h4>
-                        <i>- {{comment.posted | date: 'dd/MM/yyyy (HH:mm)'}}</i>
+                        <i fxHide.lt-sm>- {{comment.posted | date: 'dd/MM/yyyy (HH:mm)'}}</i>
                     </div>
                     <div fxLayoutAlign="start center">
                         <button mat-icon-button (click)="like(comment);">
@@ -57,6 +57,9 @@
                         </button>
                         <p class="counter">{{comment.likes.length}}</p>
                     </div>
+                </div>
+                <div fxHide.gt-xs>
+                    <i class="date">{{comment.posted | date: 'dd/MM/yyyy (HH:mm)'}}</i>
                 </div>
                 <p>{{comment.comment}}</p>
                 <div *ngIf="index+1!==survey.comments.length" class="divider"></div>

@@ -2,8 +2,6 @@ import { Component } from '@angular/core';
 import 'rxjs/add/operator/filter';
 import { Router, NavigationStart, NavigationEnd, ActivatedRoute } from '@angular/router';
 import { AuthenticationService } from './modules/user/authentication.service';
-import { MatDialog } from '@angular/material';
-import { LoginDialogComponent } from './login-dialog/login-dialog.component';
 
 @Component({
   selector: 'app-root',
@@ -15,8 +13,7 @@ export class AppComponent {
 
   constructor(private router: Router,
     private route: ActivatedRoute,
-    public authService: AuthenticationService,
-    private dialog: MatDialog) {
+    public authService: AuthenticationService) {
 
     router.events
       .filter(event => event instanceof NavigationStart)

@@ -4,8 +4,7 @@ import { Survey } from '../../../models/survey.model';
 import { ActivatedRoute, Router, NavigationStart, NavigationEnd } from '@angular/router';
 import { NgForm } from '@angular/forms/src/directives/ng_form';
 import { AuthenticationService } from '../../user/authentication.service';
-import { LoginDialogComponent } from '../../../login-dialog/login-dialog.component';
-import { MatDialog, MatSnackBar } from '@angular/material';
+import { MatSnackBar } from '@angular/material';
 
 
 @Component({
@@ -28,7 +27,6 @@ export class SurveyComponent implements OnInit {
     private route: ActivatedRoute,
     private router: Router,
     private authService: AuthenticationService,
-    private dialog: MatDialog,
     private snackBar: MatSnackBar) { }
 
 
@@ -122,15 +120,6 @@ export class SurveyComponent implements OnInit {
     this.snackBar.open(message, action, {
       duration: 3000,
     });
-  }
-
-  showLoginDialog() {
-    let dialogRef = this.dialog.open(LoginDialogComponent, {
-      width: '350px'
-    }).afterClosed().subscribe(succes => {
-      if (succes) { this.applyLikes() }
-    });
-
   }
 
   get survey(): Survey {

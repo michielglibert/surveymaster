@@ -2,16 +2,23 @@
   <h1>Welcome to surveymaster!</h1>
   <div class="divider"></div>
   <button class="loginbutton" [routerLink]="['/user/login']" mat-button>Already a member? Login!</button>
-  <mat-horizontal-stepper>
+  <mat-horizontal-stepper fxHide.lt-md>
     <mat-step completed="false">
-      <ng-template matStepLabel>Answer surveys</ng-template>
-      <img src="../../../../assets/Answers.png">
-      <div class="buttons" fxLayoutAlign="center">
-        <button mat-button matStepperNext>Next</button>
+      <div fxLayout="Column" fxLayoutAlign="center center">
+        <ng-template matStepLabel>Answer surveys</ng-template>
+        <h2>What is this? How does it work?</h2>
+        <p>Surveymaster is a free site just made for fun. Ask questions and answer questions. Compare your answer to those of
+          other users. Receive random questions submitted by our users, pick the red or blue answer.
+        </p>
+        <img src="../../../../assets/Answers.png">
+        <div class="buttons" fxLayoutAlign="center">
+          <button mat-button matStepperNext>Next</button>
+        </div>
       </div>
     </mat-step>
     <mat-step completed="false">
       <ng-template matStepLabel>View results</ng-template>
+      <p>View what other people answered on the surveys and compare yourself to the others.</p>
       <img src="../../../../assets/results.png">
       <div class="buttons" fxLayoutAlign="center">
         <button mat-button matStepperPrevious>Previous</button>
@@ -20,6 +27,9 @@
     </mat-step>
     <mat-step completed="false">
       <ng-template matStepLabel>Create your own surveys</ng-template>
+      <p>Have any questions that you think about all the time? Maybe you wonder what people would think about it? Submit it
+        to surveymaster and get answers!
+      </p>
       <img src="../../../../assets/submit.png">
       <div class="buttons" fxLayoutAlign="center">
         <button mat-button matStepperPrevious>Previous</button>
@@ -28,20 +38,76 @@
     </mat-step>
     <mat-step completed="false">
       <ng-template matStepLabel>Comment on surveys</ng-template>
+      <p>Maybe you come across a questions that you want to say something more about. Show your opinion to to other users and
+        comment on the surveys.
+      </p>
       <img src="../../../../assets/comments.png">
       <div class="buttons" fxLayoutAlign="center">
         <button mat-button matStepperPrevious>Previous</button>
         <button mat-button matStepperNext>Next</button>
       </div>
     </mat-step>
-    <mat-step completed="false" >
+    <mat-step completed="false">
       <ng-template matStepLabel>Register now</ng-template>
-      <div  fxLayout="column" fxLayoutAlign="center center">
-        <button mat-raised-button [routerLink]="['/user/register']">Create a new account</button>
+      <div fxLayout="column" fxLayoutAlign="center center">
+        <p>Answer and ask questions! Join surveymaster, it's 100% free!</p>
       </div>
-      <div class="buttons" fxLayoutAlign="center">
+      <div class="buttons" fxLayoutAlign="center" fxLayoutGap="16px">
         <button mat-button matStepperPrevious>Previous</button>
+        <button mat-button [routerLink]="['/user/register']">Create a new account</button>
       </div>
     </mat-step>
   </mat-horizontal-stepper>
+  <mat-vertical-stepper fxHide.gt-md>
+    <mat-step completed="false">
+      <ng-template matStepLabel>Answer surveys</ng-template>
+      <h2>What is this? How does it work?</h2>
+      <p>Surveymaster is a free site just made for fun. Ask questions and answer questions. Compare your answer to those of
+        other users. Receive random questions submitted by our users, pick the red or blue answer.
+      </p>
+      <img fxHide.lt-sm src="../../../../assets/Answers.png">
+      <div class="buttons" fxLayoutAlign="center">
+        <button mat-button matStepperNext>Next</button>
+      </div>
+    </mat-step>
+    <mat-step completed="false">
+      <ng-template matStepLabel>View results</ng-template>
+      <p>View what other people answered on the surveys and compare yourself to the others.</p>
+      <img fxHide.lt-sm src="../../../../assets/results.png">
+      <div class="buttons" fxLayoutAlign="center">
+        <button mat-button matStepperPrevious>Previous</button>
+        <button mat-button matStepperNext>Next</button>
+      </div>
+    </mat-step>
+    <mat-step completed="false">
+      <ng-template matStepLabel>Create your own surveys</ng-template>
+      <p>Have any questions that you think about all the time? Maybe you wonder what people would think about it? Submit it
+        to surveymaster and get answers!
+      </p>
+      <img fxHide.lt-sm src="../../../../assets/submit.png">
+      <div class="buttons" fxLayoutAlign="center">
+        <button mat-button matStepperPrevious>Previous</button>
+        <button mat-button matStepperNext>Next</button>
+      </div>
+    </mat-step>
+    <mat-step completed="false">
+      <ng-template matStepLabel>Comment on surveys</ng-template>
+      <p>Maybe you come across a questions that you want to say something more about. Show your opinion to to other users and
+        comment on the surveys.
+      </p>
+      <img fxHide.lt-sm src="../../../../assets/comments.png">
+      <div class="buttons" fxLayoutAlign="center">
+        <button mat-button matStepperPrevious>Previous</button>
+        <button mat-button matStepperNext>Next</button>
+      </div>
+    </mat-step>
+    <mat-step completed="false">
+      <ng-template matStepLabel>Register now</ng-template>
+      <p>Answer and ask questions! Join surveymaster, it's 100% free!</p>
+      <div class="buttons" fxLayout.lt-sm="column" fxLayoutAlign="center" fxLayoutGap="16px">
+        <button mat-button matStepperPrevious>Previous</button>
+        <button mat-button [routerLink]="['/user/register']">Create a new account</button>
+      </div>
+    </mat-step>
+  </mat-vertical-stepper>
 </mat-card>

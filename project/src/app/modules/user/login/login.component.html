@@ -5,8 +5,6 @@
         Login
       </h1>
     </mat-card-header>
-
-
     <form #form="ngForm" (ngSubmit)="login(form)">
       <mat-card-content>
         <div fxLayout="column" fxLayoutGap="8px">
@@ -22,11 +20,8 @@
         <mat-error>{{errorMessage}}</mat-error>
       </div>
       <mat-card-actions fxLayoutGap="10px">
-        <button color="primary" mat-raised-button fxFlex="70%">
+        <button color="primary" mat-raised-button fxFlex="100">
           Log in
-        </button>
-        <button type="button" [routerLink]="['/register']" mat-raised-button fxFlex="30%">
-          Registreer
         </button>
       </mat-card-actions>
       <div class="register" fxLayoutAlign="center">

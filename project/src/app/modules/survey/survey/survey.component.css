@@ -43,7 +43,6 @@ mat-card-content > button {
 .comment .counter {
     width: 75px;
     display: inline-block;
-    border-left: 1px rgba(0, 0, 0, .12) solid;
     padding-left: 8px;
 }
 
@@ -72,4 +71,48 @@ textarea {
 .second {
     color:white;
     background-color: #f44542;
+}
+
+.actions {
+    margin-top: 12px;
+}
+
+@media screen and (max-width: 600px) {
+    h1 {
+        font-size: 13pt;
+    }
+
+    button {
+        font-size: 10pt;
+    }
+
+    .comments {
+        border: none;
+        padding: 2px;
+    }
+
+    .comment {
+        margin: 0 4px;
+    }
+
+    .comment .counter {
+        width: auto;
+        margin-right: 8px;
+        margin-top: 4px;
+        margin-bottom: 0px;
+    }
+
+    .comment p {
+        margin-top: 12px;
+    }
+
+    .date {
+        font-size: 10pt;
+    }
+
+    
+    .actions {
+        margin-top: 0px;
+    }
+    
 }

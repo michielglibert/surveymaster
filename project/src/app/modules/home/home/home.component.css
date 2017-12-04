@@ -11,6 +11,7 @@ mat-horizontal-stepper {
     max-width: 940px;
     margin-top: 16px;
 }
+
 .buttons {
     margin-top: 16px;
 }
@@ -18,4 +19,24 @@ mat-horizontal-stepper {
 img {
     max-width:100%;
     max-height:100%;
+}
+
+p {
+    margin: 8px;
+    text-align: center !important;
+}
+
+@media screen and (max-width: 959px) {
+    p {
+        margin-left: 0;
+        text-align: left !important;
+    }
+
+    .loginbutton {
+        font-size: 14pt;
+    }
+
+    mat-vertical-stepper {
+        max-width: 100%;
+    }
 }
