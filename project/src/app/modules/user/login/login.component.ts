@@ -21,7 +21,7 @@ export class LoginComponent implements OnInit {
 
   login(form: NgForm) {
     if (form.valid) {
-      this.authService.login(this.username, this.password).subscribe(val => {
+      this.authService.login(this.username.toLocaleLowerCase(), this.password).subscribe(val => {
         if (val) {
           if (this.authService.redirectUrl) {
             this.router.navigateByUrl(this.authService.redirectUrl);

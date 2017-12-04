@@ -53,23 +53,10 @@ export class RegisterComponent implements OnInit {
     const confirmPassword = control.get('confirmPassword');
 
     if (password.value === confirmPassword.value) {
-      console.log('ela');
       return null;
       
     }
-    console.log('waaa');
     return { 'passwordsDiffer': true };
-  }
-
-  test() {
-    console.log(this.user.get("passwordGroup"));
-    console.log(this.user.get("passwordGroup").errors)
-    if (this.confirmPasswordControl !== null && this.confirmPasswordControl.errors !== null) {
-      console.log("hi");
-      console.log(this.confirmPasswordControl.errors.passwordsDiffer);
-      console.log(this.confirmPasswordControl.errors);
-    }
-
   }
 
   onSubmit() {

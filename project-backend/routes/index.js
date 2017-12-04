@@ -72,13 +72,10 @@ router.get('/API/survey/:id', auth, function (req, res, next) {
         if (err) { return next(err); }
         if(user.answeredSurveys.indexOf(survey._id) != -1) {
           survey.answered = true;
-          console.log(survey.answered );
         } else {
           survey.answered = false;
-          console.log(false);
           
         }
-        console.log(survey);
         res.json(survey);
       })
   });

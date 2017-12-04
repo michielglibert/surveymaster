@@ -15,7 +15,7 @@ import { UserResolver } from './user.resolver';
 import { ReversePipe } from '../../pipes/ReversePipe';
 
 const routes = [
-    { path: '', component: UserComponent, canActivate: [AuthGuardService], resolve: {user: UserResolver}},
+    { path: 'user', component: UserComponent, canActivate: [AuthGuardService], resolve: {user: UserResolver}},
     { path: 'login', component: LoginComponent},
     { path: 'register', component: RegisterComponent},
     { path: 'logout', component: LogoutComponent, canActivate: [AuthGuardService]}

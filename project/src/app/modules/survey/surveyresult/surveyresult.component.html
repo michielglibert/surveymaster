@@ -4,13 +4,17 @@
         <mat-card class="first" fxLayout="column" fxFlex="50" fxLayoutAlign="center center">
             <h2>{{doughnutChartLabels[1]}}</h2>
             <div class="divider"></div>
-            <p>{{doughnutChartData[1]}} other people chose this answer</p>
+            <p *ngIf="doughnutChartData[1] > 1">{{doughnutChartData[1]}} people chose this answer</p>
+            <p *ngIf="doughnutChartData[1] === 1">{{doughnutChartData[1]}} person chose this answer</p>
+            <p *ngIf="doughnutChartData[1] === 0">No one chose this answer yet</p>
             <h3>{{getPercentageOfAnswer(doughnutChartData[1])}}</h3>
         </mat-card>
         <mat-card class="second" fxLayout="column" fxFlex="50" fxLayoutAlign="center center">
             <h2>{{doughnutChartLabels[0]}}</h2>
             <div class="divider"></div>
-            <p>{{doughnutChartData[0]}} other people chose this answer</p>
+            <p *ngIf="doughnutChartData[0] > 1">{{doughnutChartData[0]}} people chose this answer</p>
+            <p *ngIf="doughnutChartData[0] === 1">{{doughnutChartData[0]}} person chose this answer</p>
+            <p *ngIf="doughnutChartData[0] === 0">No one chose this answer yet</p>
             <h3>{{getPercentageOfAnswer(doughnutChartData[0])}}</h3>
         </mat-card>
     </div>

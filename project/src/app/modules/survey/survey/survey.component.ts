@@ -99,7 +99,6 @@ export class SurveyComponent implements OnInit {
 
   like(comment) {
     let commentId = comment._id;
-    console.log(comment);
     if (comment.liked) {
       //Unlike
       this.surveyData.unlikeComment(commentId).subscribe(data => {

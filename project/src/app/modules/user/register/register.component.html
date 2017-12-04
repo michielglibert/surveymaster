@@ -2,7 +2,7 @@
   <mat-card>
     <h1>Create a new account</h1>
     <div class="divider"></div>
-    <form [formGroup]='user' (ngSubmit)="onSubmit()" class="form" fxLayout="column">
+    <form [formGroup]='user' (ngSubmit)="onSubmit()" class="form" fxLayout="column" #form="ngForm">
       <mat-form-field>
         <input matInput placeholder="Username" formControlName='username' name="username">
         <mat-error *ngIf=' user.get("username").errors?.required && user.get("username").touched'>
@@ -36,10 +36,8 @@
           </mat-hint>
         </mat-form-field>
       </div>
-      <button color="primary" [disabled]='!user.valid' mat-raised-button>Register</button>
+      <button color="primary" type="submit" [disabled]='!user.valid' mat-raised-button>Register</button>
     </form>
 
   </mat-card>
 </div>
-
-<button (click)="test()">hi</button>
