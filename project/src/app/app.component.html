@@ -23,8 +23,8 @@
   </mat-sidenav>
 
 
-  <mat-toolbar color="primary" fxLayoutGap="16px" fxLayoutAlign.xs="center center" fxLayoutAlign="start center">
-    <h2>Surveymaster</h2>
+  <mat-toolbar class="main" color="primary" fxLayoutGap="16px" fxLayoutAlign.xs="center center" fxLayoutAlign="start center">
+    <h2 (click)="goHome()">Surveymaster</h2>
     <button mat-button (click)="sidenav.open()" fxHide="false" fxHide.gt-xs>
       <mat-icon>menu</mat-icon>
     </button>

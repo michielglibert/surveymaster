@@ -7,7 +7,7 @@
     <mat-tab-group mat-stretch-tabs="always">
       <mat-tab label="Submitted surveys">
         <mat-list>
-          <div *ngFor="let survey of user.surveys">
+          <div *ngFor="let survey of user.surveys | reverse">
             <mat-list-item (click)="showSurvey(survey)">
               <i mat-list-icon class="material-icons">poll</i>
               <h2 mat-line>
@@ -23,7 +23,7 @@
       </mat-tab>
       <mat-tab label="Answered surveys">
         <mat-list>
-          <div *ngFor="let survey of user.answeredSurveys">
+          <div *ngFor="let survey of user.answeredSurveys | reverse">
             <mat-list-item (click)="showSurvey(survey)">
               <i mat-list-icon class="material-icons">poll</i>
               <h2 mat-line>
@@ -42,11 +42,15 @@
           <div *ngFor="let comment of user.comments">
             <mat-list-item (click)="showSurvey(comment.survey)">
               <i mat-list-icon class="material-icons">comment</i>
-              <h2 fxHide.lt-md  mat-line>
-                <b>On survey "{{comment.survey.vraag}}"</b> - {{comment.posted | date: 'dd/MM/yyyy (HH:mm)'}}</h2>
+              <h2 fxHide.lt-md mat-line>
+                <b>{{comment.posted | date: 'dd/MM/yyyy (HH:mm)'}} - On survey "{{comment.survey.vraag}}"</b>
+              </h2>
               <h2 fxHide.gt-sm mat-line>
-                <b>On "{{comment.survey.vraag}}"</b></h2>
-              <p fxHide.gt-sm mat-line>{{comment.posted | date: 'dd/MM/yyyy (HH:mm)'}}</p>
+                <b>On "{{comment.survey.vraag}}"</b>
+              </h2>
+
+              <i class="date" fxHide.gt-sm mat-line>{{comment.posted | date: 'dd/MM/yyyy (HH:mm)'}}</i>
+              <p class="comment" mat-line>{{comment.comment}}</p>
             </mat-list-item>
             <mat-divider></mat-divider>
           </div>

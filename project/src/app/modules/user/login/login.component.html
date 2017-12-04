@@ -9,15 +9,21 @@
       <mat-card-content>
         <div fxLayout="column" fxLayoutGap="8px">
           <mat-form-field>
-            <input matInput placeholder="Naam of e-mail" [(ngModel)]="username" name="username" required>
+            <input matInput placeholder="Username" [(ngModel)]="username" name="username" required #usernamee="ngModel">
+            <mat-error *ngIf="usernamee.errors?.required">
+              Username required
+            </mat-error>
           </mat-form-field>
           <mat-form-field>
-            <input matInput placeholder="Wachtwoord" [(ngModel)]="password" name="password" type="password" required>
+            <input matInput placeholder="Password" [(ngModel)]="password" name="password" type="password" required #passwordd="ngModel">
+            <mat-error *ngIf="passwordd.errors?.required">
+              Password required
+            </mat-error>
           </mat-form-field>
         </div>
       </mat-card-content>
       <div class="error">
-        <mat-error>{{errorMessage}}</mat-error>
+        <mat-error class="serverError">{{errorMessage}}</mat-error>
       </div>
       <mat-card-actions fxLayoutGap="10px">
         <button color="primary" mat-raised-button fxFlex="100">
@@ -25,9 +31,9 @@
         </button>
       </mat-card-actions>
       <div class="register" fxLayoutAlign="center">
-          <a (click)="registerClick()">Not a member yet? Register</a>
+        <a (click)="registerClick()">Not a member yet? Register</a>
       </div>
-      
+
     </form>
   </mat-card>
 </div>

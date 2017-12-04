@@ -33,7 +33,7 @@ mat-list-item:hover {
         font-size: 9pt !important;
     }
 
-    p {
+    .date, p {
         font-size: 9pt !important;
     }
 

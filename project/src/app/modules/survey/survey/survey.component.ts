@@ -91,6 +91,8 @@ export class SurveyComponent implements OnInit {
       this.surveyData.addCommentToSurvey(this._survey._id, this.newComment).subscribe(data => {
         let comment = data;
         this._survey.comments.push(comment);
+        this.showSnackbar("Woop! Comment posted!", "Dismiss")
+        form.resetForm();
       });
     }
   }
@@ -103,9 +105,7 @@ export class SurveyComponent implements OnInit {
       this.surveyData.unlikeComment(commentId).subscribe(data => {
         comment.liked = false;
         let index = comment.likes.indexOf(data);
-        if (index > -1) {
-          comment.likes.splice(index, 1);
-        }
+        comment.likes.splice(index, 1);
       })
     } else {
       //Like

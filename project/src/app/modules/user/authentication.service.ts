@@ -21,6 +21,10 @@ export class AuthenticationService {
     return this._user$;
   }
 
+  get token(): string {
+    return JSON.parse(localStorage.getItem('currentUser')).token;
+  }
+
   login(username: string, password: string): Observable<boolean> {
     return this.http.post<TokenResponse>(this._url + 'login',
       { username: username, password: password }).map(res => {
@@ -55,6 +59,17 @@ export class AuthenticationService {
       });
   }
 
+  checkUserNameAvailability(username: string): Observable<boolean> {
+    return this.http.post<CheckUsernameResponse>(this._url + 'checkusername', { username: username })
+    .map(item => {
+      if (item.username === 'alreadyexists') {
+        return false;
+      } else {
+        return true;
+      }
+    });
+  }
+
   logout() {
     console.log(this.user$.value)
     if(this.user$.value) {
@@ -67,6 +82,10 @@ export class AuthenticationService {
 
 interface TokenResponse {
   token: string;
+}
+
+interface CheckUsernameResponse {
+  username: string;
 }
 
 

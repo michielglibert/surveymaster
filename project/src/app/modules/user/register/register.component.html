@@ -2,18 +2,44 @@
   <mat-card>
     <h1>Create a new account</h1>
     <div class="divider"></div>
-    <form #form="ngForm" (ngSubmit)="onSubmit(form)" class="form" fxLayout="column">
+    <form [formGroup]='user' (ngSubmit)="onSubmit()" class="form" fxLayout="column">
       <mat-form-field>
-        <input matInput placeholder="Username" [(ngModel)]="username" name="username" required>
+        <input matInput placeholder="Username" formControlName='username' name="username">
+        <mat-error *ngIf=' user.get("username").errors?.required && user.get("username").touched'>
+          Username required
+        </mat-error>
+        <mat-error *ngIf='user.get("username").errors?.minlength && user.get("username").touched'>
+          Your username should be at least {{user.get("username").errors?.minlength.requiredLength }} letters
+        </mat-error>
+        <mat-error *ngIf='user.get("username").errors?.userAlreadyExists && user.get("username").touched'>
+          There is already a user with that username
+        </mat-error>
       </mat-form-field>
-      <mat-form-field>
-        <input matInput type="password" placeholder="Password" [(ngModel)]="password" name="password" required>
-      </mat-form-field>
-      <mat-form-field>
-        <input matInput type="password" placeholder="Repeat password" [(ngModel)]="passwordRepeat" name="passwordRepeat" required>
-      </mat-form-field>
-      <button color="primary" mat-raised-button>Register</button>
+      <div formGroupName='passwordGroup'>
+        <mat-form-field>
+          <input matInput type="password" placeholder="Password" formControlName='password' name="password">
+          <mat-error *ngIf='passwordControl.errors?.required && passwordControl.touched'>
+            Password required
+          </mat-error>
+          <mat-error *ngIf='passwordControl.errors?.passwordTooShort && passwordControl.touched && passwordControl.value.length > 0'>
+            Your password needs to be at least {{passwordControl.errors?.passwordTooShort.requiredLength}} letters (got {{passwordControl.errors?.passwordTooShort.actualLength}})
+          </mat-error>
+        </mat-form-field>
+        <mat-form-field>
+          <input matInput type="password" placeholder="Repeat password" formControlName='confirmPassword' name="confirmPassword">
+
+          <mat-error *ngIf='confirmPasswordControl.errors?.required && confirmPasswordControl.touched'>
+            Password required
+          </mat-error>
+          <mat-hint *ngIf='user.get("passwordGroup").errors?.passwordsDiffer && confirmPasswordControl.touched'>
+            The passwords you provided are not the same
+          </mat-hint>
+        </mat-form-field>
+      </div>
+      <button color="primary" [disabled]='!user.valid' mat-raised-button>Register</button>
     </form>
 
   </mat-card>
 </div>
+
+<button (click)="test()">hi</button>

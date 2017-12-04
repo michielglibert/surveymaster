@@ -42,8 +42,9 @@ h1 {
     height: 16px;
 }
 
-.mat-error {
-    margin-left: 32px;
+.serverError {
+    width: 100%;
+    text-align: center;
 }
 
 a {

@@ -1,6 +1,6 @@
 <mat-card>
     <div *ngIf="survey===null">
-        <p>Sorry, you answered all surveys for the moment.</p>
+        <h2>Sorry, you answered all surveys for the moment.</h2>
     </div>
     <div *ngIf="survey!==null">
         <div *ngIf="!showResult && !survey.answered">
@@ -66,11 +66,11 @@
             </div>
         </div>
         <div *ngIf="authService.user$.value">
-            <form #form="ngForm" (ngSubmit)="addComment(form)">
+            <form class="commentform" fxLayout.xs="column" fxLayoutGap.xs="0px" fxLayoutGap="24px" fxLayout="row" #form="ngForm" (ngSubmit)="addComment(form)">
                 <mat-form-field>
-                    <textarea rows="5" matInput placeholder="comment" [(ngModel)]="newComment" name="newComment" required></textarea>
+                    <textarea rows="3" matInput placeholder="comment" [(ngModel)]="newComment" name="newComment" #commentt="ngModel"></textarea>
                 </mat-form-field>
-                <button type="submit" mat-button>Post</button>
+                <button type="submit" [disabled]='!commentt.value' mat-raised-button>Post</button>
             </form>
         </div>
     </mat-card>

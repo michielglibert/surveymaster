@@ -2,6 +2,12 @@ h2 {
     margin-right: 32px;
 }
 
+h2:hover {
+    cursor: pointer;
+    color: lightgray;
+}
+
+
 .fill-space {
     flex: 1 1 auto;
   }
@@ -20,6 +26,11 @@ mat-sidenav button {
     font-size: 14pt;
 }
 
+mat-toolbar.main {
+    position: fixed;
+    z-index: 9999;
+}
+
 
 .dummy {
     height: 0;
@@ -29,7 +40,7 @@ mat-sidenav button {
 @media screen and (max-width: 600px) {
     .active {
         border-radius: 0px;
-        background: darkgrey;
+        background: rgb(196, 196, 196);
         color: white;
     }
 

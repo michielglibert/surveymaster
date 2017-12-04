@@ -32,7 +32,16 @@ export class AppComponent {
 
   }
 
-  logout() {    
+  goHome() {
+    if (this.authService.user$.value) {
+      this.router.navigate(['/survey']);
+    } else {
+      this.router.navigate(['/home']);
+    }
+
+  }
+
+  logout() {
     this.authService.logout();
     this.router.navigate(['/logout']);
   }
