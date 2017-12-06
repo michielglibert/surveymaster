@@ -41,7 +41,11 @@ router.get('/API/survey/:id/comments', function (req, res, next) {
 /* GET random survey */
 router.get('/API/survey', auth, function (req, res, next) {
   User.findById(req.payload._id, 'answeredSurveys', function (err, user) {
+    if(err) { return next(err); }
+    if(user === null) {return next(); }
     Survey.count({ _id: { $nin: user.answeredSurveys } }).exec(function (err, count) {
+      if(err) { return next(err); }
+
       var random = Math.floor(Math.random() * count)
 
       Survey.findOne({ _id: { $nin: user.answeredSurveys } }).skip(random)

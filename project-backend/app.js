@@ -60,7 +60,7 @@ app.use('/', index);
 app.use('/users', users);
 
 app.get('*', function(req, res, next) {
-  res.status(200).sendFile("./public/index.html");
+  res.sendfile("./public/index.html");
 });
 
 // catch 404 and forward to error handler
