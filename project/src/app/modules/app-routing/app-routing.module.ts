@@ -3,6 +3,7 @@ import { PageNotFoundComponent } from "./page-not-found/page-not-found.component
 import { NgModule } from "@angular/core";
 import { CommonModule } from "@angular/common";
 import { FlexLayoutModule } from "@angular/flex-layout";
+import { MaterialModule } from "../material.module";
 
 const appRoutes: Routes = [
     {
@@ -25,6 +26,7 @@ const appRoutes: Routes = [
     imports: [
         CommonModule,
         FlexLayoutModule,
+        MaterialModule,
         RouterModule.forRoot(appRoutes,
             { preloadingStrategy: PreloadAllModules })
     ],

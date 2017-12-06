@@ -6,18 +6,18 @@
       </mat-toolbar>
       <div class="buttons" fxLayout="column" (click)="sidenav.close()">
         <button mat-button class="dummy"></button>
-        <button *ngIf="!this.authService.user$.value" mat-button [routerLink]="['/home']">
+        <button *ngIf="!this.auth.user$.value" mat-button [routerLink]="['/home']">
           Home
         </button>
-        <button *ngIf="this.authService.user$.value" routerLinkActive="active" [routerLink]="['/survey']" mat-button>Survey</button>
-        <button *ngIf="this.authService.user$.value" routerLinkActive="active" [routerLink]="['/addsurvey']" mat-button>Submit a survey</button>
+        <button *ngIf="this.auth.user$.value" routerLinkActive="active" [routerLink]="['/survey']" mat-button>Survey</button>
+        <button *ngIf="this.auth.user$.value" routerLinkActive="active" [routerLink]="['/addsurvey']" mat-button>Submit a survey</button>
 
         <div class="divider"></div>
-        <button *ngIf="!this.authService.user$.value" [routerLink]="['/user/register']" mat-button>Register</button>
-        <button *ngIf="!this.authService.user$.value" [routerLink]="['/user/login']" mat-button>Login</button>
+        <button *ngIf="!this.auth.user$.value" [routerLink]="['/user/register']" mat-button>Register</button>
+        <button *ngIf="!this.auth.user$.value" [routerLink]="['/user/login']" mat-button>Login</button>
 
-        <button *ngIf="this.authService.user$.value" routerLinkActive="active" [routerLink]="['/user']" mat-button>Profile</button>
-        <button *ngIf="this.authService.user$.value" (click)="logout()" mat-button>Logout</button>
+        <button *ngIf="this.auth.user$.value" routerLinkActive="active" [routerLink]="['/user']" mat-button>Profile</button>
+        <button *ngIf="this.auth.user$.value" [routerLink]="['/logout']" mat-button>Logout</button>
       </div>
     </div>
   </mat-sidenav>
@@ -31,23 +31,23 @@
 
     <div fxLayout="row" fxShow="false" fxShow.gt-xs fxLayoutAlign="space-between" fxFlex="100%">
       <div fxLayoutGap="8px">
-        <button *ngIf="!this.authService.user$.value" mat-icon-button [routerLink]="['/home']">
+        <button *ngIf="!this.auth.user$.value" mat-icon-button [routerLink]="['/home']">
           <i class="material-icons">home</i>
         </button>
-        <div *ngIf="this.authService.user$.value">
+        <div *ngIf="this.auth.user$.value">
           <button routerLinkActive="active" [routerLink]="['/survey']" mat-button>Survey</button>
           <button routerLinkActive="active" [routerLink]="['/addsurvey']" mat-button>Submit a survey</button>
         </div>
       </div>
       <div fxLayoutGap="8px">
-        <div *ngIf="!this.authService.user$.value">
+        <div *ngIf="!this.auth.user$.value">
           <button [routerLink]="['/user/register']" mat-button>Register</button>
           <button [routerLink]="['/user/login']" mat-button>Login</button>
         </div>
 
-        <div *ngIf="this.authService.user$.value">
+        <div *ngIf="this.auth.user$.value">
           <button routerLinkActive="active" [routerLink]="['/user']" mat-button>Profile</button>
-          <button (click)="logout()" mat-button>Logout</button>
+          <button [routerLink]="['/logout']" mat-button>Logout</button>
         </div>
       </div>
     </div>

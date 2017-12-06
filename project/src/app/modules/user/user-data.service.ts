@@ -12,6 +12,7 @@ export class UserDataService {
   constructor(private http: HttpClient,
   private auth:AuthenticationService) { }
 
+  //Get user profile
   getUserData(): Observable<User> {
     return this.http.get<User>(this._url + 'API/user',
       { headers: new HttpHeaders().set('Authorization', 'Bearer ' + this.auth.token) });

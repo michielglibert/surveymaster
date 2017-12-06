@@ -19,6 +19,7 @@ export class LoginComponent implements OnInit {
   ngOnInit() {
   }
 
+  //Logs the user in, if redirecturl was set it will redirect to that
   login(form: NgForm) {
     if (form.valid) {
       this.authService.login(this.username.toLocaleLowerCase(), this.password).subscribe(val => {
@@ -34,6 +35,7 @@ export class LoginComponent implements OnInit {
     }
   }
 
+  //Navigates to register comp
   registerClick() {
     this.router.navigate(['/register']);
   }

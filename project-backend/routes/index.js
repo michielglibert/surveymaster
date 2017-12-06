@@ -81,23 +81,14 @@ router.get('/API/survey/:id', auth, function (req, res, next) {
   });
 });
 
-/* GET survey */
-/*router.get('/API/survey', function (req, res, next) {
-  Survey.count().exec(function (err, count) {
-    var random = Math.floor(Math.random() * count)
-
-    Survey.findOne({ _id: $nin }).skip(random)
-      .populate({
-        path: 'comments',
-        select: 'user comment likes posted',
-        populate: { path: 'user likes', select: 'username' }
-      })
-      .exec(function (err, survey) {
-        if (err) { return next(err); }
+/* DELETE survey */
+router.delete('/API/survey/:id', auth, function (req, res, next) {
+  Survey.findByIdAndRemove({ _id: req.params.id },
+     function(err, survey) {
+        if(err) { return next(err) }
         res.json(survey);
-      })
-  });
-});*/
+  })
+})
 
 /* POST survey */
 router.post('/API/surveys', auth, function (req, res, next) {

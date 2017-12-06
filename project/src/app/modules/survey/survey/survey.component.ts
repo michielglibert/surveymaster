@@ -14,60 +14,30 @@ import { MatSnackBar } from '@angular/material';
 })
 export class SurveyComponent implements OnInit {
   private _survey: Survey;
-  private _loading: boolean;
-  newComment: string;
-  showResult: boolean;
-  antwoordLabelArray: string[] = new Array;
-  antwoordAantallenArray: number[];
-  isLoggedIn: boolean;
-  shareUrl: string = 'hi';
+  private _newComment: string;
+  private _showResult: boolean;
+  private _antwoordLabelArray: string[] = new Array;
+  private _antwoordAantallenArray: number[];
+  public shareUrl: string;
 
 
   constructor(private surveyData: SurveyDataService,
+    private authService: AuthenticationService,
     private route: ActivatedRoute,
     private router: Router,
-    private authService: AuthenticationService,
     private snackBar: MatSnackBar) { }
 
-
   ngOnInit() {
+    //Gets value from resolver (can be random survey or survey by id)
     this.route.data.subscribe(item => {
       this._survey = item['survey'];
       this.applyLikes();
       this.sortComments();
       this.createShareUrl();
     });
-
-    if (this.authService.user$.value) {
-      this.isLoggedIn = true;
-    }
   }
 
-  createShareUrl() {
-    if (this._survey !== null) {
-      this.shareUrl = 'https://surveyymaster.herokuapp.com/survey/' + this._survey._id;
-    }
-  }
-
-  answerQuestion(answer: number) {
-    this.surveyData.answerSurvey(this._survey._id, answer).subscribe(survey => {
-      this._survey.countAntwoord1 = survey.countAntwoord1;
-      this._survey.countAntwoord2 = survey.countAntwoord2;
-      this.showResult = true;
-    });
-  }
-
-  skipQuestion() {
-    this._loading = true;
-    this.surveyData.getRandomSurvey().subscribe(data => {
-      this._survey = data
-      this.applyLikes();
-      this.router.navigate(['/survey']);
-      this._loading = false;
-      this.showResult = false;
-    });
-  }
-
+  //Applies likes to comments, if a user is in the list of likes the attribute is changed to true
   applyLikes() {
     if (this._survey !== null) {
       this._survey.comments.forEach(comment => {
@@ -80,15 +50,44 @@ export class SurveyComponent implements OnInit {
     }
   }
 
+  //Sorts comment by amount of likes (comment with more likes are at top)
   sortComments() {
     if (this._survey !== null) {
       this._survey.comments.sort((a, b) => b.likes.length - a.likes.length)
     }
   }
 
+  //Creates the url for sharing a survey
+  createShareUrl() {
+    if (this._survey !== null) {
+      this.shareUrl = 'https://surveyymaster.herokuapp.com/survey/' + this._survey._id;
+    }
+  }
+
+  //Answers the current survey
+  answerQuestion(answer: number) {
+    this.surveyData.answerSurvey(this._survey._id, answer).subscribe(survey => {
+      this._survey.countAntwoord1 = survey.countAntwoord1;
+      this._survey.countAntwoord2 = survey.countAntwoord2;
+      this._showResult = true;
+    });
+  }
+
+  //Gets the next questions (also applies likes and navigates correctly if route was by id)
+  //Also makes sure that result isn't showed anymore
+  nextQuestion() {
+    this.surveyData.getRandomSurvey().subscribe(data => {
+      this._survey = data
+      this.applyLikes();
+      this.router.navigate(['/survey']);
+      this._showResult = false;
+    });
+  }
+
+  //Add a comment to a survey, also show a snackbar
   addComment(form: NgForm) {
     if (form.valid) {
-      this.surveyData.addCommentToSurvey(this._survey._id, this.newComment).subscribe(data => {
+      this.surveyData.addCommentToSurvey(this._survey._id, this._newComment).subscribe(data => {
         let comment = data;
         this._survey.comments.push(comment);
         this.showSnackbar("Woop! Comment posted!", "Dismiss")
@@ -97,6 +96,8 @@ export class SurveyComponent implements OnInit {
     }
   }
 
+  //Like (or unlike) a comment, checks wether the comment was already liked
+  //Also pushes (or slices) the like so the amount of likes gets increased (or decreased)
   like(comment) {
     let commentId = comment._id;
     if (comment.liked) {
@@ -115,6 +116,7 @@ export class SurveyComponent implements OnInit {
     }
   }
 
+  //Show a snackbar (ref to MatSnackBar @angular/material)
   showSnackbar(message: string, action: string) {
     this.snackBar.open(message, action, {
       duration: 3000,
@@ -125,8 +127,24 @@ export class SurveyComponent implements OnInit {
     return this._survey;
   }
 
-  get loading(): boolean {
-    return this._loading;
+  get newComment(): string {
+    return this._newComment;
+  }
+
+  set newComment(newComment: string) {
+    this._newComment = newComment;
+  }
+  
+  get showResult(): boolean {
+    return this._showResult;
+  }
+
+  get antwoordLabelArray(): string[] {
+    return this._antwoordLabelArray;
+  }
+
+  get antwoordAantallenArray(): number[] {
+    return this._antwoordAantallenArray;
   }
 
 }

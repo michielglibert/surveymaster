@@ -7,8 +7,6 @@ var bodyParser = require('body-parser');
 var dotEnv = require('dotenv').config({path: './secret.env'});
 var mongoose = require('mongoose');
 let passport = require('passport');
-//mongoose.connect('mongodb://user:notasafepass@ds121726.mlab.com:21726/surveymaster', { useMongoClient: true })
-var mongoURI = 'mongodb://user:notasafepass@ds121726.mlab.com:21726/surveymaster';
 
 require('./models/user');
 require('./models/survey');
@@ -19,7 +17,7 @@ var index = require('./routes/index');
 var users = require('./routes/users');
 require('./config/passport');
 
-mongoose.connect(process.env.MONGOLAB_URI || mongoURI);
+mongoose.connect(process.env.MONGOLAB_URI || mongoURI, { useMongoClient: true });
 
 var app = express();
 
@@ -62,7 +60,7 @@ app.use('/', index);
 app.use('/users', users);
 
 app.get('*', function(req, res, next) {
-  res.sendfile("./public/index.html");
+  res.status(200).sendFile("./public/index.html");
 });
 
 // catch 404 and forward to error handler

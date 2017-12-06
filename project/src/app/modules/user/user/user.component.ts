@@ -19,6 +19,7 @@ export class UserComponent implements OnInit {
     private router: Router) { }
 
   ngOnInit() {
+    //Get user profile from resolver
     this.route.data.subscribe(item => {
       this._user = item['user'];
       this.user.comments.sort((a, b) => {
@@ -27,8 +28,8 @@ export class UserComponent implements OnInit {
     });
   }
 
+  //Navigates to selected survey
   showSurvey(survey: Survey) {
-    console.log('oy')
     this.router.navigate(['/survey/' + survey._id]);
   }
 

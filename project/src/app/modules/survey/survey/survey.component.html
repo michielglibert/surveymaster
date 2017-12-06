@@ -22,7 +22,7 @@
                     <button mat-button ngxClipboard [cbContent]="shareUrl" (cbOnSuccess)="showSnackbar('Copied to clipboard', 'Dismiss')">Share this survey&nbsp;
                         <i class="material-icons">share</i>
                     </button>
-                    <button mat-raised-button (click)="skipQuestion()">Next question</button>
+                    <button mat-raised-button (click)="nextQuestion()">Next question</button>
                 </div>
             </div>
             <div *ngIf="survey.answered" fxLayout="column" fxLayoutAlign="center center">
@@ -31,7 +31,7 @@
                     <button mat-button ngxClipboard [cbContent]="shareUrl" (cbOnSuccess)="showSnackbar('Copied to clipboard', 'Dismiss')">Share this survey&nbsp;
                         <i class="material-icons">share</i>
                     </button>
-                    <button mat-raised-button (click)="skipQuestion()">More questions</button>
+                    <button mat-raised-button (click)="nextQuestion()">More questions</button>
                 </div>
             </div>
         </div>

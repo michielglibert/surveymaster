@@ -10,9 +10,9 @@ import { MatSnackBar } from '@angular/material';
   styleUrls: ['./addsurvey.component.css']
 })
 export class AddsurveyComponent implements OnInit {
-  vraag: string;
-  antwoord1: string;
-  antwoord2: string;
+  private _vraag: string;
+  private _antwoord1: string;
+  private _antwoord2: string;
 
   constructor(private surveyData: SurveyDataService,
     private router: Router,
@@ -21,6 +21,7 @@ export class AddsurveyComponent implements OnInit {
   ngOnInit() {
   }
 
+  //Submits the form and show a snackbar, navigates to survey (by id) afterwards
   onSubmit(form: NgForm) {
     if (form.valid) {
       let survey = form.value;
@@ -31,10 +32,35 @@ export class AddsurveyComponent implements OnInit {
     }
   }
 
+  //Show a snackbar (ref to MatSnackBar @angular/material)
   showSnackbar(message: string, action: string) {
     this.snackBar.open(message, action, {
       duration: 3000,
     });
+  }
+
+  get vraag(): string {
+    return this._vraag;
+  }
+
+  set vraag(vraag: string) {
+    this._vraag = vraag;
+  }
+
+  get antwoord1(): string {
+    return this._antwoord1;
+  }
+
+  set antwoord1(antwoord1: string) {
+    this._antwoord1 = antwoord1;
+  }
+
+  get antwoord2(): string {
+    return this._antwoord2;
+  }
+
+  set antwoord2(antwoord2: string) {
+    this._antwoord2 = antwoord2;
   }
 
 }

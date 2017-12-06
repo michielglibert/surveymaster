@@ -7,7 +7,7 @@ export class Comment {
     private _likes: [{_id: string, username: string}];
     private _posted:Date;
     private _survey:Survey;
-    liked:boolean;
+    private _liked:boolean;
 
     constructor() {}
 
@@ -33,5 +33,13 @@ export class Comment {
 
     get posted(): Date {
         return this._posted;
+    }
+
+    get liked(): boolean {
+        return this._liked;
+    }
+
+    set liked(liked:boolean) {
+        this._liked = liked;
     }
 }

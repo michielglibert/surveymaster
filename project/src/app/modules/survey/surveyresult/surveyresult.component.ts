@@ -26,6 +26,7 @@ export class SurveyresultComponent implements OnInit {
     tooltips: {
       callbacks: {
         label: function (tooltipItem, data) {
+          //FROM STACKOVERFLOW: https://stackoverflow.com/questions/37257034/chart-js-2-0-doughnut-tooltip-percentages
           //get the concerned dataset
           let dataset = data.datasets[tooltipItem.datasetIndex];
           //calculate the total of this data set
@@ -46,6 +47,7 @@ export class SurveyresultComponent implements OnInit {
   constructor() { }
 
   ngOnInit() {
+    //Get all data from survey
     this.doughnutChartData = new Array;
     this.doughnutChartData.push(this._survey.countAntwoord2);
     this.doughnutChartData.push(this._survey.countAntwoord1);
@@ -55,6 +57,7 @@ export class SurveyresultComponent implements OnInit {
     this.doughnutChartLabels.push(this._survey.antwoord1);
   }
 
+  //Calculates percentage for an answer
   getPercentageOfAnswer(value: number) {
     let total = 0;
     this.doughnutChartData.forEach(number => {

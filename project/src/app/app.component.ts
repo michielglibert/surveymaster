@@ -9,12 +9,13 @@ import { AuthenticationService } from './modules/user/authentication.service';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-  private _loading: boolean;
+  private _loading: boolean = false;
 
   constructor(private router: Router,
     private route: ActivatedRoute,
-    public authService: AuthenticationService) {
+    public auth: AuthenticationService) {
 
+    //Subscribe to router events, whenever route is changing show loading
     router.events
       .filter(event => event instanceof NavigationStart)
       .subscribe(() => {
@@ -29,21 +30,15 @@ export class AppComponent {
   }
 
   ngOnInit() {
-
   }
 
+  //Go home or survey, checks if user is logged in
   goHome() {
-    if (this.authService.user$.value) {
+    if (this.auth.user$.value) {
       this.router.navigate(['/survey']);
     } else {
       this.router.navigate(['/home']);
     }
-
-  }
-
-  logout() {
-    this.authService.logout();
-    this.router.navigate(['/logout']);
   }
 
   get loading(): boolean {

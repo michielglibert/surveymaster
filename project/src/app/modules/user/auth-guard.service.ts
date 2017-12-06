@@ -6,6 +6,7 @@ import { AuthenticationService } from './authentication.service';
 
 @Injectable()
 export class AuthGuardService implements CanActivate{
+  //Checks if user is logged in
   canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): boolean | Observable<boolean> | Promise<boolean> {
     if(this.authService.user$.getValue()) {
       return true;

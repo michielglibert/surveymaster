@@ -18,7 +18,7 @@ const routes = [
         MaterialModule
     ],
     declarations: [
-        HomeComponent   
+        HomeComponent
     ],
     providers: [
     ]

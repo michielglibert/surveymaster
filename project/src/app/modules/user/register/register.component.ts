@@ -27,16 +27,8 @@ export class RegisterComponent implements OnInit {
     private router: Router,
     private fb: FormBuilder) { }
 
-  get passwordControl(): FormControl {
-    return <FormControl>this.user.get('passwordGroup').get('password');
-  }
-
-
-  get confirmPasswordControl(): FormControl {
-    return <FormControl>this.user.get('passwordGroup').get('confirmPassword');
-  }
-
   ngOnInit() {
+    //Init form group and controls (+ validators)
     this.user = this.fb.group({
       username: ['', [Validators.required, Validators.minLength(4)],
         this.serverSideValidateUsername()],
@@ -47,18 +39,19 @@ export class RegisterComponent implements OnInit {
     });
   }
 
-
+  //Compare passwords that user filled in
   comparePasswords(control: AbstractControl): { 'passwordsDiffer': boolean } {
     const password = control.get('password');
     const confirmPassword = control.get('confirmPassword');
 
     if (password.value === confirmPassword.value) {
       return null;
-      
+
     }
     return { 'passwordsDiffer': true };
   }
 
+  //Will navigate to survey page if registration is succesful
   onSubmit() {
     this.auth.register(this.user.value.username, this.passwordControl.value).subscribe(val => {
       if (val) {
@@ -67,6 +60,7 @@ export class RegisterComponent implements OnInit {
     });
   }
 
+  //Checks if username already exists
   serverSideValidateUsername(): ValidatorFn {
     return (control: AbstractControl):
       Observable<{ [key: string]: any }> => {
@@ -78,6 +72,14 @@ export class RegisterComponent implements OnInit {
           return { userAlreadyExists: true };
         })
     };
+  }
+
+  get passwordControl(): FormControl {
+    return <FormControl>this.user.get('passwordGroup').get('password');
+  }
+
+  get confirmPasswordControl(): FormControl {
+    return <FormControl>this.user.get('passwordGroup').get('confirmPassword');
   }
 
 }

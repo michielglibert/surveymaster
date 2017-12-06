@@ -1,6 +1,8 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { AddsurveyComponent } from './addsurvey.component';
+import { FlexLayoutModule } from '@angular/flex-layout';
+import { MaterialModule } from '../../material.module';
 
 describe('AddsurveyComponent', () => {
   let component: AddsurveyComponent;
@@ -8,7 +10,8 @@ describe('AddsurveyComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ AddsurveyComponent ]
+      declarations: [ AddsurveyComponent ],
+      imports: [ MaterialModule, FlexLayoutModule ]
     })
     .compileComponents();
   }));

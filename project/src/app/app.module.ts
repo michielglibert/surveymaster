@@ -8,7 +8,6 @@ import { SurveyModule } from './modules/survey/survey.module';
 import { UserModule } from './modules/user/user.module';
 import { AppRouteModule } from './modules/app-routing/app-routing.module';
 import { MaterialModule } from './modules/material.module';
-import { LoginDialogComponent } from './login-dialog/login-dialog.component';
 import { FormsModule } from '@angular/forms';
 import { AuthenticationService } from './modules/user/authentication.service';
 import { AuthGuardService } from './modules/user/auth-guard.service';
@@ -16,8 +15,7 @@ import { AuthGuardService } from './modules/user/auth-guard.service';
 
 @NgModule({
   declarations: [
-    AppComponent,
-    LoginDialogComponent
+    AppComponent
   ],
   imports: [
     BrowserModule,
@@ -32,9 +30,6 @@ import { AuthGuardService } from './modules/user/auth-guard.service';
     AppRouteModule,
     MaterialModule
     
-  ],
-  entryComponents: [
-    LoginDialogComponent
   ],
   providers: [
     AuthenticationService,

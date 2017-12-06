@@ -1,11 +1,14 @@
 import { TestBed, async } from '@angular/core/testing';
 import { AppComponent } from './app.component';
+import { MaterialModule } from './modules/material.module';
+import { FlexLayoutModule } from '@angular/flex-layout';
 describe('AppComponent', () => {
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       declarations: [
         AppComponent
       ],
+      imports: [ MaterialModule, FlexLayoutModule ]
     }).compileComponents();
   }));
   it('should create the app', async(() => {
