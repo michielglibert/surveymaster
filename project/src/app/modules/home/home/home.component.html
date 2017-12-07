@@ -1,7 +1,7 @@
 <mat-card fxLayout="column" fxLayoutAlign="center center">
   <h1>Welcome to surveymaster!</h1>
   <div class="divider"></div>
-  <button class="loginbutton" [routerLink]="['/user/login']" mat-button>Already a member? Login!</button>
+  <button class="loginbutton nowidth" [routerLink]="['/user/login']" mat-button>Already a member? Login!</button>
   <mat-horizontal-stepper fxHide.lt-md>
     <mat-step completed="false">
       <div fxLayout="Column" fxLayoutAlign="center center">
@@ -12,7 +12,9 @@
         </p>
         <img src="../../../../assets/Answers.png">
         <div class="buttons" fxLayoutAlign="center">
-          <button mat-button matStepperNext>Next</button>
+          <button mat-button matStepperNext fxLayoutAlign="center center">Next
+            <i class="material-icons">navigate_next</i>
+          </button>
         </div>
       </div>
     </mat-step>
@@ -20,9 +22,12 @@
       <ng-template matStepLabel>View results</ng-template>
       <p>View what other people answered on the surveys and compare yourself to the others.</p>
       <img src="../../../../assets/results.png">
-      <div class="buttons" fxLayoutAlign="center">
-        <button mat-button matStepperPrevious>Previous</button>
-        <button mat-button matStepperNext>Next</button>
+      <div class="buttons" fxLayoutAlign="center" fxLayoutGap="8px">
+        <button mat-button matStepperPrevious fxLayoutAlign="center center">
+          <i class="material-icons">navigate_before</i> Back</button>
+        <button mat-button matStepperNext fxLayoutAlign="center center">Next
+          <i class="material-icons">navigate_next</i>
+        </button>
       </div>
     </mat-step>
     <mat-step completed="false">
@@ -31,9 +36,12 @@
         to surveymaster and get answers!
       </p>
       <img src="../../../../assets/submit.png">
-      <div class="buttons" fxLayoutAlign="center">
-        <button mat-button matStepperPrevious>Previous</button>
-        <button mat-button matStepperNext>Next</button>
+      <div class="buttons" fxLayoutAlign="center" fxLayoutGap="8px">
+        <button mat-button matStepperPrevious fxLayoutAlign="center center">
+          <i class="material-icons">navigate_before</i> Back</button>
+        <button mat-button matStepperNext fxLayoutAlign="center center">Next
+          <i class="material-icons">navigate_next</i>
+        </button>
       </div>
     </mat-step>
     <mat-step completed="false">
@@ -42,9 +50,12 @@
         comment on the surveys.
       </p>
       <img src="../../../../assets/comments.png">
-      <div class="buttons" fxLayoutAlign="center">
-        <button mat-button matStepperPrevious>Previous</button>
-        <button mat-button matStepperNext>Next</button>
+      <div class="buttons" fxLayoutAlign="center" fxLayoutGap="8px">
+        <button mat-button matStepperPrevious fxLayoutAlign="center center">
+          <i class="material-icons">navigate_before</i> Back</button>
+        <button mat-button matStepperNext fxLayoutAlign="center center">Next
+          <i class="material-icons">navigate_next</i>
+        </button>
       </div>
     </mat-step>
     <mat-step completed="false">
@@ -52,9 +63,11 @@
       <div fxLayout="column" fxLayoutAlign="center center">
         <p>Answer and ask questions! Join surveymaster, it's 100% free!</p>
       </div>
-      <div class="buttons" fxLayoutAlign="center" fxLayoutGap="16px">
-        <button mat-button matStepperPrevious>Previous</button>
-        <button mat-button [routerLink]="['/user/register']">Create a new account</button>
+      <div class="buttons" fxLayoutAlign="center" fxLayoutGap="8px">
+        <button mat-button matStepperPrevious fxLayoutAlign="center center">
+          <i class="material-icons">navigate_before</i> Back</button>
+        <button class="nowidth" mat-button [routerLink]="['/user/register']">
+          Create a new account</button>
       </div>
     </mat-step>
   </mat-horizontal-stepper>
@@ -68,7 +81,9 @@
       <img fxHide.lt-sm src="../../../../assets/Answers.png">
       <img fxHide.gt-xs src="../../../../assets/mobile-answers.png">
       <div class="buttons" fxLayoutAlign="center">
-        <button mat-button matStepperNext>Next</button>
+        <button mat-button matStepperNext fxLayoutAlign="center center">Next
+          <i class="material-icons">navigate_next</i>
+        </button>
       </div>
     </mat-step>
     <mat-step completed="false">
@@ -77,8 +92,11 @@
       <img fxHide.lt-sm src="../../../../assets/results.png">
       <img fxHide.gt-xs src="../../../../assets/mobile-results.png">
       <div class="buttons" fxLayoutAlign="center">
-        <button mat-button matStepperPrevious>Previous</button>
-        <button mat-button matStepperNext>Next</button>
+        <button mat-button matStepperPrevious fxLayoutAlign="center center">
+          <i class="material-icons">navigate_before</i> Back</button>
+        <button mat-button matStepperNext fxLayoutAlign="center center">Next
+          <i class="material-icons">navigate_next</i>
+        </button>
       </div>
     </mat-step>
     <mat-step completed="false">
@@ -89,8 +107,11 @@
       <img fxHide.lt-sm src="../../../../assets/submit.png">
       <img fxHide.gt-xs src="../../../../assets/mobile-submit.png">
       <div class="buttons" fxLayoutAlign="center">
-        <button mat-button matStepperPrevious>Previous</button>
-        <button mat-button matStepperNext>Next</button>
+        <button mat-button matStepperPrevious fxLayoutAlign="center center">
+          <i class="material-icons">navigate_before</i> Back</button>
+        <button mat-button matStepperNext fxLayoutAlign="center center">Next
+          <i class="material-icons">navigate_next</i>
+        </button>
       </div>
     </mat-step>
     <mat-step completed="false">
@@ -101,16 +122,21 @@
       <img fxHide.lt-sm src="../../../../assets/comments.png">
       <img fxHide.gt-xs src="../../../../assets/mobile-comments.png">
       <div class="buttons" fxLayoutAlign="center">
-        <button mat-button matStepperPrevious>Previous</button>
-        <button mat-button matStepperNext>Next</button>
+        <button mat-button matStepperPrevious fxLayoutAlign="center center">
+          <i class="material-icons">navigate_before</i> Back</button>
+        <button mat-button matStepperNext fxLayoutAlign="center center">Next
+          <i class="material-icons">navigate_next</i>
+        </button>
       </div>
     </mat-step>
     <mat-step completed="false">
       <ng-template matStepLabel>Register now</ng-template>
       <p>Answer and ask questions! Join surveymaster, it's 100% free!</p>
-      <div class="buttons" fxLayout.lt-sm="column" fxLayoutAlign="center" fxLayoutGap="16px">
-        <button mat-button matStepperPrevious>Previous</button>
-        <button mat-button [routerLink]="['/user/register']">Create a new account</button>
+      <div class="buttons" fxLayout.lt-sm="column" fxLayoutAlign="center" fxLayoutGap="8px">
+        <button class="nowidth" mat-button matStepperPrevious fxLayoutAlign="center center">
+          <i class="material-icons">navigate_before</i> Back</button>
+        <button class="nowidth" mat-button [routerLink]="['/user/register']">
+          Create a new account</button>
       </div>
     </mat-step>
   </mat-vertical-stepper>

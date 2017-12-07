@@ -31,13 +31,22 @@ mat-toolbar.main {
     z-index: 9999;
 }
 
+i {
+    font-size: 16pt;
+    margin-right: 8px;
+}
+
+p {
+    margin: 0;
+}
+
 
 .dummy {
     height: 0;
     padding: 0 !important;
 }
 
-@media screen and (max-width: 600px) {
+@media screen and (max-width: 599px) {
     .active {
         border-radius: 0px;
         background: rgb(196, 196, 196);

@@ -16,6 +16,14 @@ mat-horizontal-stepper {
     margin-top: 16px;
 }
 
+button {
+    width: 100px;
+}
+
+button.nowidth {
+    width: auto;
+}
+
 img {
     max-width:100%;
     max-height:100%;

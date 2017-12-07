@@ -4,6 +4,7 @@ import { AuthenticationService } from '../authentication.service';
 import { Router } from '@angular/router';
 import { FormGroup, FormBuilder, Validators, AbstractControl, ValidatorFn, FormControl } from '@angular/forms';
 import { Observable } from 'rxjs/Observable';
+import { MatSnackBar } from '@angular/material';
 
 function passwordValidator(length: number): ValidatorFn {
   return (control: AbstractControl): { [key: string]: any } => {
@@ -25,7 +26,8 @@ export class RegisterComponent implements OnInit {
 
   constructor(private auth: AuthenticationService,
     private router: Router,
-    private fb: FormBuilder) { }
+    private fb: FormBuilder,
+    private snackBar: MatSnackBar) { }
 
   ngOnInit() {
     //Init form group and controls (+ validators)
@@ -55,6 +57,7 @@ export class RegisterComponent implements OnInit {
   onSubmit() {
     this.auth.register(this.user.value.username, this.passwordControl.value).subscribe(val => {
       if (val) {
+        this.showSnackbar("Yay! Account created!","Dismiss")
         this.router.navigate(['/survey']);
       }
     });
@@ -72,6 +75,13 @@ export class RegisterComponent implements OnInit {
           return { userAlreadyExists: true };
         })
     };
+  }
+
+  //Show a snackbar (ref to MatSnackBar @angular/material)
+  showSnackbar(message: string, action: string) {
+    this.snackBar.open(message, action, {
+      duration: 3000,
+    });
   }
 
   get passwordControl(): FormControl {

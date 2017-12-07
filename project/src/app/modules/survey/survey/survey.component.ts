@@ -32,7 +32,6 @@ export class SurveyComponent implements OnInit {
     this.route.data.subscribe(item => {
       this._survey = item['survey'];
       this.applyLikes();
-      this.sortComments();
       this.createShareUrl();
     });
   }
@@ -47,13 +46,6 @@ export class SurveyComponent implements OnInit {
           }
         })
       })
-    }
-  }
-
-  //Sorts comment by amount of likes (comment with more likes are at top)
-  sortComments() {
-    if (this._survey !== null) {
-      this._survey.comments.sort((a, b) => b.likes.length - a.likes.length)
     }
   }
 

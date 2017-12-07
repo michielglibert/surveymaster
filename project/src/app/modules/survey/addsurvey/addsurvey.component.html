@@ -21,7 +21,10 @@
           You need a second answer
         </mat-error>
       </mat-form-field>
-      <button color="primary" [disabled]='!form.valid' mat-raised-button>Submit new survey</button>
+      <button color="primary" [disabled]='!form.valid' mat-raised-button>
+        <p fxLayoutAlign="center center">
+          <i class="material-icons">add</i>&nbsp;Submit new survey</p>
+      </button>
     </form>
   </mat-card>
 </div>

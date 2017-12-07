@@ -6,7 +6,6 @@ import { AuthenticationService } from './authentication.service';
 
 @Injectable()
 export class UserDataService {
-  //private readonly _url = 'http://localhost:3000/';
   private readonly _url = 'https://surveyymaster.herokuapp.com/';
 
   constructor(private http: HttpClient,

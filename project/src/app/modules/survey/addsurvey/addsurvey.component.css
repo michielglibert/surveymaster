@@ -7,3 +7,11 @@ h1 {
 button {
     margin-top: 12px;
 }
+
+button p {
+    margin: 0;
+}
+
+i {
+    margin-right: 8px;
+}

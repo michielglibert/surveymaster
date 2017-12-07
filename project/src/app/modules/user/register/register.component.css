@@ -17,6 +17,16 @@ button {
     width: 100%;
 }
 
+i {
+    margin-right: 8px;
+}
+
 .mat-hint {
     color: #f44336;
+}
+
+@media screen and (max-width: 600px) {
+    .mat-form-field {
+        margin-bottom: 8px;
+    }
 }

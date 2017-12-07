@@ -19,19 +19,27 @@
         <div class="actions">
             <div *ngIf="showResult" fxLayout="column" fxLayoutAlign="center center">
                 <div fxLayout="row" fxLayout.lt-sm="column" fxLayoutGap="64px" fxLayoutGap.lt-sm="16px">
-                    <button mat-button ngxClipboard [cbContent]="shareUrl" (cbOnSuccess)="showSnackbar('Copied to clipboard', 'Dismiss')">Share this survey&nbsp;
-                        <i class="material-icons">share</i>
+                    <button mat-button ngxClipboard [cbContent]="shareUrl" (cbOnSuccess)="showSnackbar('Copied to clipboard', 'Dismiss')">
+                        <p fxLayoutAlign="center center">
+                            <i class="material-icons">share</i> Share this survey</p>
                     </button>
-                    <button mat-raised-button (click)="nextQuestion()">Next question</button>
+                    <button mat-button (click)="nextQuestion()">
+                        <p fxLayoutAlign="center center">
+                            <i class="material-icons">question_answer</i>Next question
+                        </p>
+                    </button>
                 </div>
             </div>
             <div *ngIf="survey.answered" fxLayout="column" fxLayoutAlign="center center">
                 <div fxLayout="row" fxLayout.lt-sm="column" fxLayoutGap="64px" fxLayoutGap.lt-sm="16px">
-
-                    <button mat-button ngxClipboard [cbContent]="shareUrl" (cbOnSuccess)="showSnackbar('Copied to clipboard', 'Dismiss')">Share this survey&nbsp;
-                        <i class="material-icons">share</i>
+                    <button mat-button ngxClipboard [cbContent]="shareUrl" (cbOnSuccess)="showSnackbar('Copied to clipboard', 'Dismiss')">
+                        <p fxLayoutAlign="center center">
+                            <i class="material-icons">share</i> Share this survey</p>
                     </button>
-                    <button mat-raised-button (click)="nextQuestion()">More questions</button>
+                    <button mat-button (click)="nextQuestion()">
+                        <p fxLayoutAlign="center center">
+                            <i class="material-icons">question_answer</i> More questions</p>
+                    </button>
                 </div>
             </div>
         </div>
@@ -70,7 +78,10 @@
                 <mat-form-field>
                     <textarea rows="3" matInput placeholder="comment" [(ngModel)]="newComment" name="newComment" #commentt="ngModel"></textarea>
                 </mat-form-field>
-                <button type="submit" [disabled]='!commentt.value' mat-raised-button>Post</button>
+                <button type="submit" [disabled]='!commentt.value' mat-raised-button>
+                    <p fxLayoutAlign="center center">
+                        <i class="material-icons">add</i> Post</p>
+                </button>
             </form>
         </div>
     </mat-card>

@@ -23,7 +23,7 @@
   </mat-sidenav>
 
 
-  <mat-toolbar class="main" color="primary" fxLayoutGap="16px" fxLayoutAlign.xs="center center" fxLayoutAlign="start center">
+  <mat-toolbar class="main" color="primary" fxLayoutGap="12px" fxLayoutAlign.xs="center center" fxLayoutAlign="start center">
     <h2 (click)="goHome()">Surveymaster</h2>
     <button mat-button (click)="sidenav.open()" fxHide="false" fxHide.gt-xs>
       <mat-icon>menu</mat-icon>
@@ -34,20 +34,31 @@
         <button *ngIf="!this.auth.user$.value" mat-icon-button [routerLink]="['/home']">
           <i class="material-icons">home</i>
         </button>
-        <div *ngIf="this.auth.user$.value">
-          <button routerLinkActive="active" [routerLink]="['/survey']" mat-button>Survey</button>
-          <button routerLinkActive="active" [routerLink]="['/addsurvey']" mat-button>Submit a survey</button>
+        <div *ngIf="this.auth.user$.value" fxLayoutAlign="start center" fxLayoutGap="12px">
+          <button routerLinkActive="active" [routerLink]="['/survey']" mat-button>
+            <p fxLayoutAlign="center center"><i class="material-icons">poll</i> Survey</p>
+          </button>
+          <button routerLinkActive="active" [routerLink]="['/addsurvey']" mat-button>
+            <p fxLayoutAlign="center center"><i class="material-icons">add</i>Submit a survey</p>
+          </button>
         </div>
       </div>
       <div fxLayoutGap="8px">
-        <div *ngIf="!this.auth.user$.value">
-          <button [routerLink]="['/user/register']" mat-button>Register</button>
-          <button [routerLink]="['/user/login']" mat-button>Login</button>
+        <div *ngIf="!this.auth.user$.value" fxLayoutAlign="start center" fxLayoutGap="12px">
+          <button [routerLink]="['/user/register']" mat-button>
+            <p fxLayoutAlign="center center"><i class="material-icons">portrait</i>Register</p></button>
+          <button [routerLink]="['/user/login']" mat-button>
+            <p fxLayoutAlign="center center"><i class="material-icons">input</i>Login</p>
+          </button>
         </div>
 
-        <div *ngIf="this.auth.user$.value">
-          <button routerLinkActive="active" [routerLink]="['/user']" mat-button>Profile</button>
-          <button [routerLink]="['/logout']" mat-button>Logout</button>
+        <div *ngIf="this.auth.user$.value" fxLayoutAlign="start center" fxLayoutGap="12px">
+          <button routerLinkActive="active" [routerLink]="['/user']" mat-button>
+            <p fxLayoutAlign="center center"><i class="material-icons">person</i>Profile</p>
+          </button>
+          <button [routerLink]="['/logout']" mat-button>
+            <p fxLayoutAlign="center center"><i class="material-icons">power_settings_new</i>Logout</p>
+          </button>
         </div>
       </div>
     </div>

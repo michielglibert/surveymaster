@@ -6,7 +6,6 @@ import 'rxjs/add/operator/map';
 
 @Injectable()
 export class AuthenticationService {
-  //private _url = 'http://localhost:3000/';
   private readonly _url = 'https://surveyymaster.herokuapp.com/';
   private _user$: BehaviorSubject<string>;
   public redirectUrl;
@@ -68,7 +67,6 @@ export class AuthenticationService {
 
   //Logs user out by removing currentUser from local storage
   logout() {
-    console.log(this.user$.value)
     if (this.user$.value) {
       localStorage.removeItem('currentUser');
       setTimeout(() => this._user$.next(null));
