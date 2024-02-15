@@ -1,31 +1,39 @@
-import { Injectable } from '@angular/core';
-import { BehaviorSubject } from 'rxjs/BehaviorSubject';
-import { HttpClient } from '@angular/common/http';
-import { Observable } from 'rxjs/Observable';
-import 'rxjs/add/operator/map';
+import { Injectable } from "@angular/core";
+import { BehaviorSubject } from "rxjs/BehaviorSubject";
+import { HttpClient } from "@angular/common/http";
+import { Observable } from "rxjs/Observable";
+import "rxjs/add/operator/map";
 
 @Injectable()
 export class AuthenticationService {
-  private readonly _url = 'https://surveyymaster.herokuapp.com/';
+  private readonly _url = "https://surveymaster-gy9m.onrender.com/";
   private _user$: BehaviorSubject<string>;
   public redirectUrl;
 
   constructor(private http: HttpClient) {
-    const currentUser = JSON.parse(localStorage.getItem('currentUser'));
+    const currentUser = JSON.parse(localStorage.getItem("currentUser"));
     this._user$ = new BehaviorSubject<string>(
-      currentUser && currentUser.username);
+      currentUser && currentUser.username
+    );
   }
 
   //Logs user in and sets currentUser in localstorage
   login(username: string, password: string): Observable<boolean> {
-    return this.http.post<TokenResponse>(this._url + 'login',
-      { username: username, password: password }).map(res => {
+    return this.http
+      .post<TokenResponse>(this._url + "login", {
+        username: username,
+        password: password,
+      })
+      .map((res) => {
         const token = res.token;
         if (token) {
-          localStorage.setItem('currentUser', JSON.stringify({
-            username: username,
-            token: token
-          }));
+          localStorage.setItem(
+            "currentUser",
+            JSON.stringify({
+              username: username,
+              token: token,
+            })
+          );
           this._user$.next(username);
           return true;
         } else {
@@ -34,17 +42,23 @@ export class AuthenticationService {
       });
   }
 
-
   //Registers users and logs user in by setting currentUser in localstorage
   register(username: string, password: string): Observable<boolean> {
-    return this.http.post<TokenResponse>(this._url + 'register',
-      { username: username, password: password }).map(res => {
+    return this.http
+      .post<TokenResponse>(this._url + "register", {
+        username: username,
+        password: password,
+      })
+      .map((res) => {
         const token = res.token;
         if (token) {
-          localStorage.setItem('currentUser', JSON.stringify({
-            username: username,
-            token: res.token
-          }));
+          localStorage.setItem(
+            "currentUser",
+            JSON.stringify({
+              username: username,
+              token: res.token,
+            })
+          );
           this._user$.next(username);
           return true;
         } else {
@@ -55,9 +69,12 @@ export class AuthenticationService {
 
   //Check if username is available
   checkUserNameAvailability(username: string): Observable<boolean> {
-    return this.http.post<CheckUsernameResponse>(this._url + 'checkusername', { username: username })
-      .map(item => {
-        if (item.username === 'alreadyexists') {
+    return this.http
+      .post<CheckUsernameResponse>(this._url + "checkusername", {
+        username: username,
+      })
+      .map((item) => {
+        if (item.username === "alreadyexists") {
           return false;
         } else {
           return true;
@@ -68,7 +85,7 @@ export class AuthenticationService {
   //Logs user out by removing currentUser from local storage
   logout() {
     if (this.user$.value) {
-      localStorage.removeItem('currentUser');
+      localStorage.removeItem("currentUser");
       setTimeout(() => this._user$.next(null));
     }
   }
@@ -78,9 +95,8 @@ export class AuthenticationService {
   }
 
   get token(): string {
-    return JSON.parse(localStorage.getItem('currentUser')).token;
+    return JSON.parse(localStorage.getItem("currentUser")).token;
   }
-
 }
 
 //Interfaces for responses
@@ -92,5 +108,3 @@ interface TokenResponse {
 interface CheckUsernameResponse {
   username: string;
 }
-
-

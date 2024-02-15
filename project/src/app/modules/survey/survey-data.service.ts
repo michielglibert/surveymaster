@@ -7,7 +7,7 @@ import { AuthenticationService } from '../user/authentication.service';
 
 @Injectable()
 export class SurveyDataService {
-  private readonly _url = 'https://surveyymaster.herokuapp.com/';
+  private readonly _url = 'https://surveymaster-gy9m.onrender.com/';
 
   constructor(private http: HttpClient,
     private auth: AuthenticationService) { }
